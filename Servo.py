@@ -14,6 +14,8 @@ class Servo:
     def getRotate(self):
         return self.rotate
 
-    def setRotate(rotate):
-        selft.rotate = rotate
+    def setRotate(self, rotate):
+        self.rotate = rotate
         return
+
+

@@ -7,9 +7,9 @@ Formula para calcular la distancia
 d = V*(t/2)
 V = velocidad del sonido
 t = tiempo, que tarda la señal de ir del emisor al obstaculo y volver al receptor
-"""
+""
 
-
+##oximetria
 import RPi.GPIO as GPIO
 import time
 GPIO.setmode(GPIO.BCM)
