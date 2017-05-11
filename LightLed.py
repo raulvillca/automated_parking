@@ -1,17 +1,25 @@
 #!/usr/bin/python
-import RPi.GPIO as IO
+import RPi.GPIO as GPIO
+
 class LightLed:
-    def __init__(self, pins):
-        gpio.setmode(gpio.BOARD)
-        self.io=IO
-        for pin in pins:
-            self.io.setup(pin, IO.OUT)
+    def __init__(self, pin, mode):
+
+        GPIO.setmode(mode)
+
+        self.io = GPIO
+
+        self.io.setup(pin, GPIO.OUT)
+
         return
 
     def turnOff(self, pin):
-        self.io.output(pin, True)
+
+        self.io.output(pin, False)
+
         return
 
     def turnOn(self, pin):
+
         self.io.output(pin, True)
+
         return
