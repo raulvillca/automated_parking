@@ -4,7 +4,7 @@ import requests
 import json
 import time
 import sys
-import threading
+import thread
 
 import UltrasonicSensor
 import Buzzer
@@ -13,66 +13,119 @@ import LightSensor
 import InfraredSensor
 import Servomotor
 
-PIN_LED_LDR = 1
-PIN_LDR = 2
+pins = {
+    "PIN_LED_LDR" : 1,
+    "PIN_LDR" : 2,
+    "PIN_SERVOMOTOR_IN" : 3,
+    "PIN_INFRARED_IN" : 5,
+    "PIN_SERVOMOTOR_OUT" : 4,
+    "PIN_INFRARED_OUT" : 5,
+    "POUT_ULTRASONIC_A" : 6,
+    "PIN_ULTRASONIC_A" : 7,
+    "PIN_BUZZER_A" : 8,
+    "PIN_LED_A" : 9,
+    "POUT_ULTRASONIC_B" : 10,
+    "PIN_ULTRASONIC_B" : 11,
+    "PIN_BUZZER_B" : 12,
+    "PIN_LED_B" : 13,
+    "POUT_ULTRASONIC_C" : 14,
+    "PIN_ULTRASONIC_C" : 15,
+    "PIN_BUZZER_C" : 16,
+    "PIN_LED_C" : 17,
+    "PIN_SDA_LCD" : 18,
+    "PIN_SCL_LCD" : 19
+}
 
-PIN_SERVOMOTOR_IN = 3
-PIN_INFRARED_IN = 5
-
-PIN_SERVOMOTOR_OUT = 4
-PIN_INFRARED_OUT = 5
-
-POUT_ULTRASONIC_A = 6
-PIN_ULTRASONIC_A = 7
-PIN_BUZZER_A = 8
-PIN_LED_A = 9
-
-POUT_ULTRASONIC_B = 10
-PIN_ULTRASONIC_B = 11
-PIN_BUZZER_B = 12
-PIN_LED_B = 13
-
-POUT_ULTRASONIC_C = 14
-PIN_ULTRASONIC_C = 15
-PIN_BUZZER_C = 16
-PIN_LED_C = 17
-
-PIN_SDA_LCD = 18
-PIN_SCL_LCD = 19
 ADDRESS_LCD = 0x3f
 
-def setup(mode):
-    s_light = LightSensor(PIN_LDR, mode)
-    a_led_ldr = LightLed(PIN_LED_LDR, mode)
+class AutomatizedParking:
 
-    s_ultra_a = UltrasonicSensor(PIN_ULTRASONIC_A, POUT_ULTRASONIC_A, mode)
-    s_ultra_b = UltrasonicSensor(PIN_ULTRASONIC_B, POUT_ULTRASONIC_B, mode)
-    s_ultra_c = UltrasonicSensor(PIN_ULTRASONIC_C, POUT_ULTRASONIC_C, mode)
-    a_buzzer_a = Buzzer(PIN_BUZZER_A, mode)
-    a_buzzer_b = Buzzer(PIN_BUZZER_B, mode)
-    a_buzzer_c = Buzzer(PIN_BUZZER_C, mode)
-    a_led_a = LightLed(PIN_LED_A, mode)
-    a_led_b = LightLed(PIN_LED_B, mode)
-    a_led_c = LightLed(PIN_LED_C, mode)
+    IS_ACTIVE = True
 
-    s_infra_in = InfraredSensor(PIN_INFRARED_IN, mode)
-    a_servo_in = Servomotor(PIN_SERVOMOTOR_IN, mode)
-    s_infra_out = InfraredSensor(PIN_INFRARED_OUT, mode)
-    a_servo_out = Servomotor(PIN_SERVOMOTOR_OUT, mode)
 
-def init():
+    def setup(self, pins, address_lcd, mode):
+        self.sensors = {
+            "light" : LightSensor(pins["PIN_LDR"], mode),
+            "ultra_a" : UltrasonicSensor(pins["PIN_ULTRASONIC_A"], pins["POUT_ULTRASONIC_A"], mode),
+            "ultra_b" : UltrasonicSensor(pins["PIN_ULTRASONIC_B"], pins["POUT_ULTRASONIC_B"], mode),
+            "ultra_c" : UltrasonicSensor(pins["PIN_ULTRASONIC_C"], pins["POUT_ULTRASONIC_C"], mode),
+            "infra_in" : InfraredSensor(pins["PIN_INFRARED_IN"], mode),
+            "infra_out" : InfraredSensor(pins["PIN_INFRARED_OUT"], mode)
+        }
 
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(11,GPIO.OUT)
-    pwm=GPIO.PWM(11,50)
-    pwm.start(3.5)
-    time.sleep(1)
-    pwm.ChangeDutyCycle(7.5)
-    time.sleep(1)
-    pwm.ChangeDutyCycle(3.5)
-    time.sleep(1)
-    return;
+        self.actuators = {
+            "led_ldr" : LightLed(pins["PIN_LED_LDR"], mode),
+            "buzzer_a" : Buzzer(pins["PIN_BUZZER_A"], mode),
+            "buzzer_b" : Buzzer(pins["PIN_BUZZER_B"], mode),
+            "buzzer_c" : Buzzer(pins["PIN_BUZZER_C"], mode),
+            "led_a" : LightLed(pins["PIN_LED_A"], mode),
+            "led_b" : LightLed(pins["PIN_LED_B"], mode),
+            "led_c" : LightLed(pins["PIN_LED_C"], mode),
+            "servo_in" : Servomotor(pins["PIN_SERVOMOTOR_IN"], 2.5, mode),
+            "servo_out" : Servomotor(pins["PIN_SERVOMOTOR_OUT"], 2.5, mode)
+        }
 
-init()
+        self.availables = {
+            "ultra_a" : True,
+            "ultra_b" : True,
+            "ultra_c" : True
+        }
+
+    def servo(self, sensorName, actuatorName):
+        while self.IS_ACTIVE == True:
+            if self.sensors[sensorName] == 1:
+                self.actuators[actuatorName].rotate(7.5)
+                time.sleep(3.5)
+                self.actuators[actuatorName].rotate(2.5)
+
+    def servoIn(self, sensorName, actuatorName):
+        while self.IS_ACTIVE == True:
+            if self.sensors[sensorName] == 1 & \
+                    ( self.availables["ultra_a"] | self.availables["ultra_b"] | self.availables["ultra_c"] ):
+                self.actuators[actuatorName].rotate(7.5)
+                time.sleep(3.5)
+                self.actuators[actuatorName].rotate(2.5)
+
+    def lightLDR(self):
+        while self.IS_ACTIVE == True:
+            if self.sensors["light"].getSignal() < 700:
+                self.actuators["led_ldr"].turnOn()
+            else:
+                self.actuators["led_ldr"].turnOff()
+
+    def ultrasonic(self, sensorName, actuatorName):
+        while self.IS_ACTIVE == True:
+            if 4 < self.sensors[sensorName].calculateDistanceFromAnObject() < 6:
+                self.actuators[actuatorName].turnOn()
+                time.sleep(1.5)
+                self.actuators[actuatorName].turnOff()
+                self.availables[sensorName] = False
+            elif self.sensors[sensorName] < 4:
+                self.actuators[actuatorName].turnOn()
+                time.sleep(0.7)
+                self.actuators[actuatorName].turnOff()
+            else:
+                self.availables[sensorName] = True
+            time.sleep(0.1)
+
+    def monitorUltrasonic(self):
+        while self.IS_ACTIVE == True:
+            if self.availables["ultra_a"] & self.availables["ultra_b"] & self.availables["ultra_c"]:
+
+
+    def begin(self):
+        try:
+            thread.start_new_thread( self.servoIn, ("infra_in", "servo_in", ) )
+            thread.start_new_thread( self.servo, ("infra_out", "servo_out", ) )
+            thread.start_new_thread( self.ultrasonic, ("ultra_a", "buzzer_a") )
+            thread.start_new_thread( self.ultrasonic, ("ultra_b", "buzzer_b") )
+            thread.start_new_thread( self.ultrasonic, ("ultra_c", "buzzer_c") )
+        except:
+            print "Error: unable to start thread"
+            self.IS_ACTIVE = False
+
+parkingSystem = AutomatizedParking()
+parkingSystem.setup(pins, ADDRESS_LCD, GPIO.BOARD)
+parkingSystem.begin()
 
 exit()

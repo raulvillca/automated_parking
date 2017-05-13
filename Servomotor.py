@@ -19,9 +19,6 @@ class Servomotor:
 
         return
 
-    def getRotate(self):
-        return self.rotate
-
     def setRotate(self, rotate):
         self.rotate = rotate
         return
