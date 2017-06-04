@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/time_item_cardview"
+        android:visibility="visible"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dimen_cardview_item"
+        android:layout_marginRight="@dimen/dimen_cardview_item"
+        android:layout_marginTop="@dimen/dimen_cardview_elevation"
+        android:layout_marginBottom="@dimen/dimen_cardview_item"
+        card_view:cardElevation="@dimen/dimen_cardview_elevation"
+        card_view:cardCornerRadius="@dimen/dimen_cardview_elevation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/sizeMedium"
+                android:text="@string/start_time"
+                android:textSize="@dimen/sizeMedium"
+                android:textStyle="bold"
+                android:id="@+id/time_item_start_time"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/sizeMedium"
+                android:text="@string/final_time"
+                android:textSize="@dimen/sizeMedium"
+                android:textStyle="bold"
+                android:id="@+id/time_item_final_time"
+                android:layout_toRightOf="@+id/parking_item_start_time"/>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_height_button"
+        android:id="@+id/time_item_message"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:paddingBottom="@dimen/spacing_timer"
+        android:layout_marginBottom="@dimen/dimen_cardview_item"
+        android:layout_marginLeft="@dimen/dimen_cardview_item"
+        android:layout_marginRight="@dimen/dimen_cardview_item"
+        android:visibility="gone"
+        card_view:cardElevation="@dimen/dimen_cardview_elevation"
+        card_view:cardCornerRadius="@dimen/dimen_cardview_elevation">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/sizeMedium"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="@string/parking_item_add"/>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="@dimen/dimen_imageview_fingerprint"
+        android:layout_height="@dimen/dimen_imageview_fingerprint"
+        android:padding="@dimen/sizeMedium"
+        android:layout_gravity="center"
+        android:id="@+id/fragment_login_image_fingerprint"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_fingerprint" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/finger_detect"
+        android:paddingTop="@dimen/spacing"
+        android:paddingBottom="@dimen/spacing"
+        android:textSize="@dimen/sizeMedium"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"/>
+</FrameLayout>

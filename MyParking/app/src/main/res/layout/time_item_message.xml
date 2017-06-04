@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/parking_item_message"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/spacing_timer"
+    android:layout_margin="@dimen/dimen_cardview_item"
+    android:visibility="visible"
+    android:background="@drawable/border"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sizeMedium"
+        android:gravity="center"
+        android:text="@string/parking_item_add"/>
+</LinearLayout>

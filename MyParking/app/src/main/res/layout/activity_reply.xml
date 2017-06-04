@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ReplyActivity"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/sizeMedium"
+            android:text="@string/start_time"
+            android:textSize="@dimen/sizeMedium"
+            android:textStyle="bold"
+            android:id="@+id/time_item_start_time"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/sizeMedium"
+            android:text="@string/final_time"
+            android:textSize="@dimen/sizeMedium"
+            android:textStyle="bold"
+            android:id="@+id/time_item_final_time"
+            android:layout_toRightOf="@+id/parking_item_start_time"/>
+    </LinearLayout>
+</LinearLayout>-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_reply"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="45dp"
+    android:paddingTop="45dp"
+    android:background="@color/colorAccent"
+    android:gravity="center"
+    tools:context=".ReplyActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/sizeMedium"
+            android:text="@string/start_time"
+            android:textSize="@dimen/sizeMedium"
+            android:textStyle="bold"
+            android:id="@+id/activity_reply_start_time"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/sizeMedium"
+            android:text="@string/final_time"
+            android:textSize="@dimen/sizeMedium"
+            android:textStyle="bold"
+            android:id="@+id/activity_reply_final_time"
+            android:layout_toRightOf="@+id/parking_item_start_time"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/activity_reply_button_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:background="@null"
+        android:padding="@dimen/spacing"
+        android:src="@drawable/ic_speak"/>
+</RelativeLayout>
