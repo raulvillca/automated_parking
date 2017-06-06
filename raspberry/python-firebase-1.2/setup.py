@@ -6,9 +6,11 @@ try:
 except ImportError:
     from distutils.core import setup
 
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
-    long_description = readme.read()
-
+try:
+    with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+        long_description = readme.read()
+except:
+    long_description = ""
 
 setup(name='python-firebase',
       version='1.2',
