@@ -18,8 +18,46 @@ def send_notification(token_gcm, title, message):
     r = requests.post(url, data=json.dumps(data), headers=headers)
     print(r.text)
 
-def getReservations():
+def getAReservations():
     arrayParking = {}
     arrayParking['parking_a'] = firebase.get('/parking_a/unlam/times', None)
+
+    i = 0
+    arrayItems = {}
+    for path in arrayParking['parking_a']:
+        arrayItems[i] = firebase.get('/parking_a/unlam/times/'+path, None)
+        i += 1
+
+    return arrayItems;
+
+def getBReservations():
+    arrayParking = {}
     arrayParking['parking_b'] = firebase.get('/parking_a/unlam/times', None)
-    return arrayParking;
+
+    i = 0
+    arrayItems = {}
+    for path in arrayParking['parking_b']:
+        arrayItems[i] = firebase.get('/parking_a/unlam/times/'+path, None)
+        i += 1
+
+    return arrayItems;
+
+
+arrayA = getAReservations()
+arrayB = getBReservations()
+
+print ("A")
+i = 0
+while i < len(arrayA):
+    print(arrayA[i]['start_time'])
+    print(arrayA[i]['final_time'])
+    print(arrayA[i]['user_gcm'])
+    i += 1
+
+print ("B")
+i = 0
+while i < len(arrayB):
+    print(arrayB[i]['start_time'])
+    print(arrayB[i]['final_time'])
+    print(arrayB[i]['user_gcm'])
+    i += 1
