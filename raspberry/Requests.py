@@ -2,6 +2,8 @@ import json
 import requests
 from firebase import firebase
 
+firebase = firebase.FirebaseApplication('https://automatedparking-43b58.firebaseio.com/')
+
 def send_notification(token_gcm, title, message):
     data = {
         'to': 'd9Y5oO9Ol9A:APA91bHViajMMu2IUavIGuQzg42S4UfsIMcVGkyMsCCVYJCsS3jHot4ijYUPpvArbTzTMpHaeN7jorlQCy7Wa9oFnqQBQiGIuU03oOeLsO42eJS44W0j-HiByrBjQ-uLJ-M-oYepX051',
@@ -15,9 +17,6 @@ def send_notification(token_gcm, title, message):
 
     r = requests.post(url, data=json.dumps(data), headers=headers)
     print(r.text)
-
-def connectFirebase():
-    firebase = firebase.FirebaseApplication('https://automatedparking-43b58.firebaseio.com/')
 
 def getReservations():
     arrayParking = {}
