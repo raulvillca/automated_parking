@@ -18,7 +18,7 @@ import ultrasonico_buzzer_a
 
 IS_ACTIVE = True
 
-""
+
 pins = {
     "PIN_LED_LDR" : 1,
     "PIN_LDR" : 2,
@@ -122,9 +122,9 @@ class AutomatizedParking:
             print "Error: unable to start thread"
             self.IS_ACTIVE = False
 
-parkingSystem = AutomatizedParking()
-parkingSystem.setup(pins, ADDRESS_LCD, GPIO.BOARD)
-parkingSystem.begin()""
+#parkingSystem = AutomatizedParking()
+#parkingSystem.setup(pins, ADDRESS_LCD, GPIO.BOARD)
+#parkingSystem.begin()
 
 cerrojo_ultrasonico = False
 
