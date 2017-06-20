@@ -12,34 +12,46 @@ class UltrasonicSensor:
 
         GPIO.setup(pinIn, GPIO.IN)
 
+        print "Medicion de la distancia en curso"
+
         self.io = GPIO
 
         self.trig = pinOut
 
         self.echo = pinIn
 
+        self.V = 34300
+
         return
 
     def calculateDistanceFromAnObject(self):
-        self.io.output(self.trig, False)
-        time.sleep(2*10**-6)
-        self.io.output(self.trig, True)
-        time.sleep(10*10**-6)
-        self.io.output(self.trig, False)
 
-        while self.io.input(self.echo) == 0:
-            start = time.time()
+        GPIO.output(self.trig, False)                   #TRIG en estado bajo
+        print "Espere que el sensor se estabilice"
+        time.sleep(1)                              #Esperar 2 segundos
 
-        while self.io.input(self.echo) == 1:
-            end = time.time()
+        GPIO.output(self.trig, True)                    #TRIG en estado alto
+        time.sleep(0.00001)                        #Delay de 0.00001 segundos
+        GPIO.output(self.trig, False)                   #TRIG en estado bajo
 
-        #La duracion del pulso del pin Echo sera la diferencia entre el tiempo de inicio y el final
-        duracion = end-start
+        while GPIO.input(self.echo)==0:                 #Comprueba si ECHO está en estado bajo
+          pulse_start = time.time()                #Guarda el tiempo transcurrido, mientras esta en estado bajo
 
-        #Este tiempo viene dado en segundos. Si lo pasamos
-        #a microsegundos, podemos aplicar directamente las formulas de la documentacion
-        duracion = duracion*10**6
-        medida = duracion/58
-        #hay que dividir por la constante que pone en la documentacion, nos dara la distancia en cm
+        while GPIO.input(self.echo)==1:                 #Comprueba si ECHO está en estado alto
+          pulse_end = time.time()                  #Guarda el tiempo transcurrido, mientras esta en estado alto
+
+        t = pulse_end - pulse_start                #Se obtienen la duración del pulso, calculando la diferencia entre pulse_start  y pulse_end
+
+        medida = t * (self.V/2)                      #Se multiplica la duración del pulso, por 17150, para obetener la distancia
+        medida = round(medida, 2)            #Se redondea a dos decimales
+
+        if medida > 2 and medida < 400:      #Comprueba si la distancia está dentro del rango
+
+          print "Distancia: ",medida,"cm"       #Imprime la distancia
+
+        else:
+          print "Fuera de Rango"                   #Imprime fuera de rango
+
+        GPIO.cleanup()							   #Limpia los pines
 
         return medida

@@ -28,10 +28,6 @@ pins = {
     "PIN_ULTRASONIC_B" : 11,
     "PIN_BUZZER_B" : 12,
     "PIN_LED_B" : 13,
-    "POUT_ULTRASONIC_C" : 14,
-    "PIN_ULTRASONIC_C" : 15,
-    "PIN_BUZZER_C" : 16,
-    "PIN_LED_C" : 17,
     "PIN_SDA_LCD" : 18,
     "PIN_SCL_LCD" : 19
 }
@@ -48,7 +44,6 @@ class AutomatizedParking:
             "light" : LightSensor(pins["PIN_LDR"], mode),
             "ultra_a" : UltrasonicSensor(pins["PIN_ULTRASONIC_A"], pins["POUT_ULTRASONIC_A"], mode),
             "ultra_b" : UltrasonicSensor(pins["PIN_ULTRASONIC_B"], pins["POUT_ULTRASONIC_B"], mode),
-            "ultra_c" : UltrasonicSensor(pins["PIN_ULTRASONIC_C"], pins["POUT_ULTRASONIC_C"], mode),
             "infra_in" : InfraredSensor(pins["PIN_INFRARED_IN"], mode),
             "infra_out" : InfraredSensor(pins["PIN_INFRARED_OUT"], mode)
         }
@@ -57,10 +52,8 @@ class AutomatizedParking:
             "led_ldr" : LightLed(pins["PIN_LED_LDR"], mode),
             "buzzer_a" : Buzzer(pins["PIN_BUZZER_A"], mode),
             "buzzer_b" : Buzzer(pins["PIN_BUZZER_B"], mode),
-            "buzzer_c" : Buzzer(pins["PIN_BUZZER_C"], mode),
             "led_a" : LightLed(pins["PIN_LED_A"], mode),
             "led_b" : LightLed(pins["PIN_LED_B"], mode),
-            "led_c" : LightLed(pins["PIN_LED_C"], mode),
             "servo_in" : Servomotor(pins["PIN_SERVOMOTOR_IN"], 2.5, mode),
             "servo_out" : Servomotor(pins["PIN_SERVOMOTOR_OUT"], 2.5, mode)
         }
@@ -81,7 +74,7 @@ class AutomatizedParking:
     def servoIn(self, sensorName, actuatorName):
         while self.IS_ACTIVE == True:
             if self.sensors[sensorName] == 1 & \
-                    ( self.availables["ultra_a"] | self.availables["ultra_b"] | self.availables["ultra_c"] ):
+                    ( self.availables["ultra_a"] | self.availables["ultra_b"] ):
                 self.actuators[actuatorName].rotate(7.5)
                 time.sleep(3.5)
                 self.actuators[actuatorName].rotate(2.5)
@@ -119,7 +112,6 @@ class AutomatizedParking:
             thread.start_new_thread( self.servo, ("infra_out", "servo_out", ) )
             thread.start_new_thread( self.ultrasonic, ("ultra_a", "buzzer_a") )
             thread.start_new_thread( self.ultrasonic, ("ultra_b", "buzzer_b") )
-            thread.start_new_thread( self.ultrasonic, ("ultra_c", "buzzer_c") )
         except:
             print "Error: unable to start thread"
             self.IS_ACTIVE = False
