@@ -28,7 +28,7 @@ class UltrasonicSensor:
 
         GPIO.output(self.trig, False)
         print "Espere que el sensor se estabilice"
-        time.sleep(1.5)
+        time.sleep(2)
 
         GPIO.output(self.trig, True)
         time.sleep(0.00001)

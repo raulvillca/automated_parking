@@ -101,6 +101,6 @@ class Lcd:
 
 #ESTE FUNCIONA
 #lcd = Lcd()
-
+#lcd.lcd_clear()
 #lcd.lcd_display_string("antisteo on YT", 1)
 #lcd.lcd_display_string("LCD runtime is", 2)
