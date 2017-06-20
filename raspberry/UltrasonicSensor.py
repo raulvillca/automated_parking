@@ -28,11 +28,14 @@ class UltrasonicSensor:
 
         GPIO.output(self.trig, False)
         print "Espere que el sensor se estabilice"
-        time.sleep(1)
+        time.sleep(1.5)
 
         GPIO.output(self.trig, True)
         time.sleep(0.00001)
-        GPIO.output(self.trig, False)            
+        GPIO.output(self.trig, False)
+
+        pulse_end = time.time()
+        pulse_start = time.time()
 
         while GPIO.input(self.echo)==0:
           pulse_start = time.time()
