@@ -47,8 +47,10 @@ def medicion_ultrasonico_a():
         result_a = ultrasonico_buzzer_a(GPIO.BCM)
         if result_a > 10:
             cerrojo_ultrasonico = False
+            print "Entro cerrojo"
         else:
             cerrojo_ultrasonico = True
+            print "No entra a cerrojo"
 
 def imprimir_mensajes():
     lcd = LCDDriver.Lcd()
@@ -63,3 +65,5 @@ def imprimir_mensajes():
 def begin():
     thread.start_new_thread( medicion_ultrasonico_a )
     thread.start_new_thread( imprimir_mensajes )
+
+begin()
