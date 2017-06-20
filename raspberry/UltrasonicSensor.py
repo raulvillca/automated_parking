@@ -55,3 +55,8 @@ class UltrasonicSensor:
         GPIO.cleanup()							   #Limpia los pines
 
         return medida
+
+
+us = UltrasonicSensor(23,24,GPIO.BCM)
+result = us.calculateDistanceFromAnObject()
+print result
