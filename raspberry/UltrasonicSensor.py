@@ -26,33 +26,33 @@ class UltrasonicSensor:
 
     def calculateDistanceFromAnObject(self):
 
-        GPIO.output(self.trig, False)                   #TRIG en estado bajo
+        GPIO.output(self.trig, False)
         print "Espere que el sensor se estabilice"
-        time.sleep(1)                              #Esperar 2 segundos
+        time.sleep(1)
 
-        GPIO.output(self.trig, True)                    #TRIG en estado alto
-        time.sleep(0.00001)                        #Delay de 0.00001 segundos
-        GPIO.output(self.trig, False)                   #TRIG en estado bajo
+        GPIO.output(self.trig, True)
+        time.sleep(0.00001)
+        GPIO.output(self.trig, False)            
 
-        while GPIO.input(self.echo)==0:                 #Comprueba si ECHO está en estado bajo
-          pulse_start = time.time()                #Guarda el tiempo transcurrido, mientras esta en estado bajo
+        while GPIO.input(self.echo)==0:
+          pulse_start = time.time()
 
-        while GPIO.input(self.echo)==1:                 #Comprueba si ECHO está en estado alto
-          pulse_end = time.time()                  #Guarda el tiempo transcurrido, mientras esta en estado alto
+        while GPIO.input(self.echo)==1:
+          pulse_end = time.time()
 
-        t = pulse_end - pulse_start                #Se obtienen la duración del pulso, calculando la diferencia entre pulse_start  y pulse_end
+        t = pulse_end - pulse_start
 
-        medida = t * (self.V/2)                      #Se multiplica la duración del pulso, por 17150, para obetener la distancia
-        medida = round(medida, 2)            #Se redondea a dos decimales
+        medida = t * (self.V/2)
+        medida = round(medida, 2)
 
-        if medida > 2 and medida < 400:      #Comprueba si la distancia está dentro del rango
+        if medida > 2 and medida < 400:
 
-          print "Distancia: ",medida,"cm"       #Imprime la distancia
+          print "Distancia: ",medida,"cm"
 
         else:
-          print "Fuera de Rango"                   #Imprime fuera de rango
+          print "Fuera de Rango"
 
-        GPIO.cleanup()							   #Limpia los pines
+        GPIO.cleanup()
 
         return medida
 
