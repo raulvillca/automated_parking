@@ -98,3 +98,8 @@ class Lcd:
    def lcd_clear(self):
       self.lcd_write(LCD_CLEARDISPLAY)
       self.lcd_write(LCD_RETURNHOME)
+
+lcd = Lcd()
+
+lcd.lcd_display_string("antisteo on YT", 1)
+lcd.lcd_display_string("LCD runtime is", 2)
