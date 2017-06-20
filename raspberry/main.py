@@ -82,13 +82,13 @@ def begin():
             print "No entra a cerrojo"
 
         if cerrojo_ultrasonico == False:
-            lcd.lcd_display_string("    HAY", 1)
-            lcd.lcd_display_string("DISPONIBILIDAD", 2)
+            lcd.lcd_display_string("    *** HAY ****", 1)
+            lcd.lcd_display_string("*DISPONIBILIDAD*", 2)
 
         else:
             #lcd.lcd_clear()
-            lcd.lcd_display_string("Estacionamiento", 1)
-            lcd.lcd_display_string("completo", 2)
+            lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
+            lcd.lcd_display_string("****COMPLETO****", 2)
 
 
 begin()
