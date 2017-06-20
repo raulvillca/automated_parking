@@ -63,7 +63,7 @@ def imprimir_mensajes():
             lcd.lcd_display_string("completo", 2)
 
 def begin():
-    thread.start_new_thread( medicion_ultrasonico_a )
-    thread.start_new_thread( imprimir_mensajes )
+    thread.start_new_thread( medicion_ultrasonico_a, () )
+    thread.start_new_thread( imprimir_mensajes, () )
 
 begin()
