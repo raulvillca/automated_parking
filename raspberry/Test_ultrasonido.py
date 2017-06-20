@@ -3,9 +3,9 @@ import RPi.GPIO as GPIO
 import time
 
 BUZZER_A = 8
-TRIG = 23                                  #pin 23 como TRIG
-ECHO = 24                                  #pin 24 como ECHO
-V    = 34300			    			   # Velocidad del sonido 34300cm/s
+TRIG = 23                                  
+ECHO = 24
+V    = 34300
 
 
 def ultrasonido_buzzer_a(mode):
@@ -15,41 +15,41 @@ def ultrasonido_buzzer_a(mode):
 
     print "Medicion de la distancia en curso"
 
-    GPIO.setup(TRIG,GPIO.OUT)                  #TRIG como salida
-    GPIO.setup(ECHO,GPIO.IN)                   #ECHO como entrada
+    GPIO.setup(TRIG,GPIO.OUT)
+    GPIO.setup(ECHO,GPIO.IN)
     GPIO.setup(BUZZER_A, GPIO.OUT)
 
-    GPIO.output(TRIG, False)                   #TRIG en estado bajo
+    GPIO.output(TRIG, False)
     print "Espere que el sensor se estabilice"
-    time.sleep(0.5)                              #Esperar 2 segundos
+    time.sleep(0.5)
 
-    GPIO.output(TRIG, True)                    #TRIG en estado alto
-    time.sleep(0.00001)                        #Delay de 0.00001 segundos
-    GPIO.output(TRIG, False)                   #TRIG en estado bajo
+    GPIO.output(TRIG, True)
+    time.sleep(0.00001)
+    GPIO.output(TRIG, False)
 
     pulse_start = time.time()
     pulse_end = time.time()
 
-    while GPIO.input(ECHO)==0:                 #Comprueba si ECHO esta en estado bajo
-        pulse_start = time.time()                #Guarda el tiempo transcurrido, mientras esta en estado bajo
+    while GPIO.input(ECHO)==0:
+        pulse_start = time.time()
 
-    while GPIO.input(ECHO)==1:                 #Comprueba si ECHO esta en estado alto
-        pulse_end = time.time()                  #Guarda el tiempo transcurrido, mientras esta en estado alto
+    while GPIO.input(ECHO)==1:
+        pulse_end = time.time()
 
-    t = pulse_end - pulse_start                #Se obtienen la duración del pulso, calculando la diferencia entre pulse_start  y pulse_end
+    t = pulse_end - pulse_start
 
-    distancia = t * (V/2)                      #Se multiplica la duración del pulso, por 17150, para obetener la distancia
-    distancia = round(distancia, 2)            #Se redondea a dos decimales
+    distancia = t * (V/2)
+    distancia = round(distancia, 2)
 
-    if distancia > 2 and distancia < 400:      #Comprueba si la distancia está dentro del rango
+    if distancia > 2 and distancia < 400:
         if 4 < distancia < 7:
             GPIO.output(BUZZER_A, False)
         elif 7 < distancia < 10:
             GPIO.output(BUZZER_A, True)
 
-        print "Distancia: ",distancia,"cm"       #Imprime la distancia
+        print "Distancia: ",distancia,"cm"
 
     else:
-      print "Fuera de Rango"                   #Imprime fuera de rango
+      print "Fuera de Rango"
 
-    #GPIO.cleanup()							   #Limpia todos pines
+    #GPIO.cleanup()
