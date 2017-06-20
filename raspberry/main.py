@@ -13,10 +13,12 @@ import LightSensor
 import InfraredSensor
 import Servomotor
 
+import LCDDriver
 import ultrasonico_buzzer_a
 
 IS_ACTIVE = True
 
+""
 pins = {
     "PIN_LED_LDR" : 1,
     "PIN_LDR" : 2,
@@ -122,13 +124,28 @@ class AutomatizedParking:
 
 parkingSystem = AutomatizedParking()
 parkingSystem.setup(pins, ADDRESS_LCD, GPIO.BOARD)
-parkingSystem.begin()
+parkingSystem.begin()""
+
+cerrojo_ultrasonico = False
 
 def medicion_ultrasonico_a():
     while IS_ACTIVE == True:
         result_a = ultrasonico_buzzer_a(GPIO.BCM)
         if result_a > 10:
+            cerrojo_ultrasonico = False
+        else:
+            cerrojo_ultrasonico = True
 
+def imprimir_mensajes():
+    lcd = LCDDriver.Lcd()
+    while IS_ACTIVE == True:
+        if cerrojo_ultrasonico == False:
+            lcd.lcd_display_string("    Hay", 1)
+            lcd.lcd_display_string("disponibilidad", 2)
+        else
+            lcd.lcd_display_string("Estacionamiento", 1)
+            lcd.lcd_display_string("completo", 2)
 
 def begin():
     thread.start_new_thread( medicion_ultrasonico_a )
+    thread.start_new_thread( imprimir_mensajes )
