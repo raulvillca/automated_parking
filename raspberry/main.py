@@ -65,8 +65,12 @@ def imprimir_mensajes():
 def begin():
     try:
         thread.start_new_thread( medicion_ultrasonico_a, )
+    except:
+        print "Error: unable to start thread ultrasonico"
+
+    try:
         thread.start_new_thread( imprimir_mensajes,  )
     except:
-       print "Error: unable to start thread"
+        print "Error: unable to start thread lcd"
 
 begin()
