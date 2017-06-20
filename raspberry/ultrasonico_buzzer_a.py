@@ -3,17 +3,15 @@ import RPi.GPIO as GPIO
 import time
 
 BUZZER_A = 8
-TRIG = 23                                  
+TRIG = 23
 ECHO = 24
 V    = 34300
 
 
-def ultrasonido_buzzer_a(mode):
+def ultrasonico_buzzer_a(mode):
 
     #GPIO.setmode(GPIO.BCM)
     GPIO.setmode(mode)
-
-    print "Medicion de la distancia en curso"
 
     GPIO.setup(TRIG,GPIO.OUT)
     GPIO.setup(ECHO,GPIO.IN)
@@ -52,4 +50,5 @@ def ultrasonido_buzzer_a(mode):
     else:
       print "Fuera de Rango"
 
+    return distancia
     #GPIO.cleanup()

@@ -80,7 +80,7 @@ def greaterThanTimeNow(time_firebase):
 
 def removeItem(item_firebase):
     firebase.delete('/parking_a/unlam/times/'+item_firebase['time_id'], None)
-
+""
 arrayA = getAReservations()
 arrayB = getBReservations()
 
@@ -100,3 +100,4 @@ while i < len(arrayB):
     print(arrayB[i]['user_gcm'])
     i += 1
 
+""

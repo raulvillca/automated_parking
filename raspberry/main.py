@@ -13,6 +13,10 @@ import LightSensor
 import InfraredSensor
 import Servomotor
 
+import ultrasonico_buzzer_a
+
+IS_ACTIVE = True
+
 pins = {
     "PIN_LED_LDR" : 1,
     "PIN_LDR" : 2,
@@ -120,4 +124,11 @@ parkingSystem = AutomatizedParking()
 parkingSystem.setup(pins, ADDRESS_LCD, GPIO.BOARD)
 parkingSystem.begin()
 
-exit()
+def medicion_ultrasonico_a():
+    while IS_ACTIVE == True:
+        result_a = ultrasonico_buzzer_a(GPIO.BCM)
+        if result_a > 10:
+
+
+def begin():
+    thread.start_new_thread( medicion_ultrasonico_a )
