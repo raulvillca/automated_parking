@@ -56,7 +56,7 @@ def imprimir_mensajes():
         if cerrojo_ultrasonico == False:
             lcd.lcd_display_string("    Hay", 1)
             lcd.lcd_display_string("disponibilidad", 2)
-        else
+        else:
             lcd.lcd_display_string("Estacionamiento", 1)
             lcd.lcd_display_string("completo", 2)
 
