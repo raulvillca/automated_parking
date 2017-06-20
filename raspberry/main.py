@@ -44,7 +44,7 @@ cerrojo_ultrasonico = False
 
 def medicion_ultrasonico_a():
     while IS_ACTIVE == True:
-        result_a = ultrasonico_buzzer_a(GPIO.BCM)
+        result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
         if result_a > 10:
             #cerrojo_ultrasonico = False
             print "Entro cerrojo"
