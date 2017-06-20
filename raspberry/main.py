@@ -15,6 +15,10 @@ import Servomotor
 
 import LCDDriver
 import ultrasonico_buzzer_a
+import RPi_I2C_driver
+from time import *
+
+
 
 IS_ACTIVE = True
 
@@ -64,7 +68,9 @@ def imprimir_mensajes():
 
 def begin():
     cerrojo_ultrasonico = False
-    lcd = LCDDriver.Lcd()
+
+    lcd = RPi_I2C_driver.lcd()
+    
     while IS_ACTIVE == True:
         lcd.lcd_clear()
         result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
@@ -76,8 +82,9 @@ def begin():
             print "No entra a cerrojo"
 
         if cerrojo_ultrasonico == False:
-            lcd.lcd_display_string("    Hay", 1)
-            lcd.lcd_display_string("disponibilidad", 2)
+            lcd.lcd_display_string("    HAY", 1)
+            lcd.lcd_display_string("DISPONIBILIDAD", 2)
+
         else:
             lcd.lcd_display_string("Estacionamiento", 1)
             lcd.lcd_display_string("completo", 2)
