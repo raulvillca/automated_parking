@@ -46,30 +46,30 @@ def medicion_ultrasonico_a():
     while IS_ACTIVE == True:
         result_a = ultrasonico_buzzer_a(GPIO.BCM)
         if result_a > 10:
-            cerrojo_ultrasonico = False
+            #cerrojo_ultrasonico = False
             print "Entro cerrojo"
         else:
-            cerrojo_ultrasonico = True
+            #cerrojo_ultrasonico = True
             print "No entra a cerrojo"
 
 def imprimir_mensajes():
     lcd = LCDDriver.Lcd()
     while IS_ACTIVE == True:
-        if cerrojo_ultrasonico == False:
-            lcd.lcd_display_string("    Hay", 1)
-            lcd.lcd_display_string("disponibilidad", 2)
-        else:
-            lcd.lcd_display_string("Estacionamiento", 1)
-            lcd.lcd_display_string("completo", 2)
+        #if cerrojo_ultrasonico == False:
+        lcd.lcd_display_string("    Hay", 1)
+        lcd.lcd_display_string("disponibilidad", 2)
+        #else:
+            #lcd.lcd_display_string("Estacionamiento", 1)
+            #lcd.lcd_display_string("completo", 2)
 
 def begin():
     try:
-        thread.start_new_thread( medicion_ultrasonico_a, )
+        thread.start_new_thread( medicion_ultrasonico_a, () )
     except:
         print "Error: unable to start thread ultrasonico"
 
     try:
-        thread.start_new_thread( imprimir_mensajes,  )
+        thread.start_new_thread( imprimir_mensajes, () )
     except:
         print "Error: unable to start thread lcd"
 
