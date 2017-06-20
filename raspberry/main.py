@@ -70,9 +70,9 @@ def begin():
     cerrojo_ultrasonico = False
 
     lcd = RPi_I2C_driver.lcd()
-    
+
     while IS_ACTIVE == True:
-        lcd.lcd_clear()
+
         result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
         if result_a > 10:
             cerrojo_ultrasonico = False
@@ -86,6 +86,7 @@ def begin():
             lcd.lcd_display_string("DISPONIBILIDAD", 2)
 
         else:
+            #lcd.lcd_clear()
             lcd.lcd_display_string("Estacionamiento", 1)
             lcd.lcd_display_string("completo", 2)
 
