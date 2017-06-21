@@ -16,7 +16,7 @@ servo_a = GPIO.PWM(PIN_SERVO_A, 50)
 servo_a.start(0.5)
 
 def servo_infrarrojo (value):
-	print GPIO.input("Infrarrojo ", PIN_SENSOR_A)
+	print "Valor del servo ", value, GPIO.input(PIN_SENSOR_A)
 
 	if not value :
 		if GPIO.input(PIN_SENSOR_A) == 1:
