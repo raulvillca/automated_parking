@@ -5,7 +5,6 @@ import json
 import time
 import sys
 
-import LCDDriver
 import ultrasonico_buzzer_a
 import RPi_I2C_driver
 import infra_servo
@@ -13,28 +12,6 @@ import infra_servo
 IS_ACTIVE = True
 
 ADDRESS_LCD = 0x3f
-
-cerrojo_ultrasonico = False
-
-def medicion_ultrasonico_a():
-    while IS_ACTIVE == True:
-        result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
-        if result_a > 10:
-            #cerrojo_ultrasonico = False
-            print "Entro cerrojo"
-        else:
-            #cerrojo_ultrasonico = True
-            print "No entra a cerrojo"
-
-def imprimir_mensajes():
-    lcd = LCDDriver.Lcd()
-    while IS_ACTIVE == True:
-        #if cerrojo_ultrasonico == False:
-        lcd.lcd_display_string("    Hay", 1)
-        lcd.lcd_display_string("disponibilidad", 2)
-        #else:
-            #lcd.lcd_display_string("Estacionamiento", 1)
-            #lcd.lcd_display_string("completo", 2)
 
 def begin():
     cerrojo_ultrasonico = False
