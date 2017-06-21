@@ -43,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
-              <caret line="41" column="45" lean-forward="false" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+              <caret line="41" column="50" lean-forward="false" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
               <folding>
                 <element signature="e#18#41#0" expanded="true" />
               </folding>
@@ -54,8 +54,8 @@
       <file leaf-file-name="ultrasonico_buzzer_a.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ultrasonico_buzzer_a.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="46" column="28" lean-forward="false" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+            <state relative-caret-position="-75">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="13" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -518,7 +518,7 @@
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
-          <caret line="41" column="45" lean-forward="false" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+          <caret line="41" column="50" lean-forward="false" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
           <folding>
             <element signature="e#18#41#0" expanded="true" />
           </folding>
@@ -527,8 +527,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ultrasonico_buzzer_a.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="46" column="28" lean-forward="false" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+        <state relative-caret-position="-75">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="13" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
