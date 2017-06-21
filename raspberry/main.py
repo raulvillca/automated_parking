@@ -8,6 +8,7 @@ import sys
 import LCDDriver
 import ultrasonico_buzzer_a
 import RPi_I2C_driver
+import infra_servo
 
 IS_ACTIVE = True
 
@@ -58,6 +59,8 @@ def begin():
         #    print(arrayB[i]['final_time'])
         #    print(arrayB[i]['user_gcm'])
         #    i += 1
+
+        infra_servo.servo_infrarrojo(cerrojo_ultrasonico)
 
         result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
         if result_a > 10:
