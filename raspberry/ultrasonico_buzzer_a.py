@@ -41,10 +41,10 @@ def ultrasonico_buzzer_a(mode):
 
     if distancia > 2 and distancia < 400:
 
-        if 2 < distancia < 3.9:
+        if 2 < distancia < 3:
             GPIO.output(BUZZER_A, True)
             time.sleep(0.5)
-        elif distancia > 3.9:
+        elif distancia > 3:
             GPIO.output(BUZZER_A, False)
 
         print "Distancia a: ",distancia,"cm"
