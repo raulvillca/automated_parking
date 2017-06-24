@@ -89,18 +89,28 @@ def greaterThanTimeNow(time_firebase):
     #mm_now = datoN[1]
 
     hh_fb, mm_fb = time_firebase.split(':')
-    hh_now, mm_now = time_now.split(':')
+    print "paso 0"
 
     hh_fb_int = int(hh_fb)*100
+    print "paso 1"
+
+    hh_now, mm_now = time_now.split(':')
+    print "paso 2"
 
     hh_fb_int = hh_fb_int + int(mm_fb)
+    print "paso 3"
 
     hh_now_int = int(hh_now)*100
+    print "paso 4"
+
     hh_now_int = hh_now_int + int(mm_now)
+    print "paso 5"
 
     if hh_fb_int <= hh_now_int:
+        print "paso 6"
         return False;
     else:
+        print "paso 7"
         return True;
 
 def removeItemA(item_firebase):
