@@ -34,7 +34,7 @@ def receive(arg):
         time.sleep(4)
 
         print "Mensaje recibido ", valor_cerrojos
-        if valor_cerrojos is '11':
+        if valor_cerrojos.contains('11') :
             lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
             lcd.lcd_display_string("****COMPLETO****", 2)
         else:
