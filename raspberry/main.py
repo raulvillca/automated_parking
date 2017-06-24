@@ -6,6 +6,7 @@ import time
 import sys
 
 import ultrasonico_buzzer_a
+import ultrasonico_buzzer_b
 import RPi_I2C_driver
 import infra_servo
 
@@ -51,8 +52,8 @@ def begin():
             print "Ultrasonico a"
 
 
-        result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
-        if result_a > 10:
+        result_b = ultrasonico_buzzer_b.ultrasonico_buzzer_b(GPIO.BCM)
+        if result_b > 10:
             cerrojo_ultrasonico_b = False
             print "Entro cerrojo b"
         else:
