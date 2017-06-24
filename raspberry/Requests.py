@@ -30,6 +30,9 @@ def send_notification(time_firebase, token_gcm, title, message):
     hh_now_int = int(hh_now)*100
     hh_now_int = hh_now_int + int(mm_now) - 10
 
+
+    print str(hh_fb_int), str(hh_now_int)
+
     if hh_fb_int <= hh_now_int:
         return False;
     else:
