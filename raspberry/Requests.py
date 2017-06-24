@@ -39,7 +39,7 @@ def send_notification(time_firebase, token_gcm, title, message):
     if hh_now_int < hh_fb_int:
         r = requests.post(url, data=json.dumps(data), headers=headers)
         print(r.text)
-        removeMSJDisplay(time_firebase)
+
         return False;
     else:
         return False;
@@ -48,14 +48,18 @@ def getNotifications():
     notifications = {}
     notifications['notifications'] = firebase.get('/notifications', None)
 
+
     i = 0
     arrayItems = {}
-    for path in notifications['notifications']:
-        arrayItems[i] = firebase.get('/notifications/'+path, None)
-        print "Request ", arrayItems[i]
-        i += 1
 
-    return arrayItems;
+    if notifications['notifications'] != None :
+        for path in notifications['notifications']:
+            arrayItems[i] = firebase.get('/notifications/'+path, None)
+            print "Request ", arrayItems[i]
+            i += 1
+        return arrayItems;
+    else:
+        return None;
 
 def getAReservations():
     arrayParking = {}
@@ -118,6 +122,7 @@ def removeItemB(item_firebase):
 
 def removeMSJDisplay(notification):
     firebase.delete('/notifications/'+notification['id'], None)
+    print "removeMSJDisplay:continuar"
 
 
 #arrayA = getAReservations()
