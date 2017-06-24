@@ -7,10 +7,10 @@ token_gcm = 'd9Y5oO9Ol9A:APA91bHViajMMu2IUavIGuQzg42S4UfsIMcVGkyMsCCVYJCsS3jHot4
 
 headers = {
     "Content-Type": "application/json",
-    "Authorization": "key=AAAAWUF2oGQ:APA91bFNkIO0-qlzhNL3oYFAhN6mpaYBPJD0P1zMMNuB2BblI7Md5xjYlLgfJKlcPLZ9LOiXULQLQz0h8M-Zx-8-U2aayr1-jEIEYl1fnT42rahEkiimUNtsdlcEsElFb3hsPu268nMk"
+    "Authorization": "key=AAAAQ68mVz0:APA91bGsT3lt6PSPZzk7f-Pfr01DedkKrCMEigmqdLoDSINcbxobaZlaYGLmScUWwb_IMj9-q4pWDlwX-bw6BckR2Ddt1isAr4P3zrjM7xt47bNHH3frVV861YpzSDK5zn-XOPZwTpVB"
 }
 url = 'https://fcm.googleapis.com/fcm/send'
-firebase = firebase.FirebaseApplication('https://automatedparking-43b58.firebaseio.com/')
+firebase = firebase.FirebaseApplication('https://parkings-50852.firebaseio.com/')
 
 def send_notification(time_firebase, token_gcm, title, message):
 
