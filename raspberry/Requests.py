@@ -21,22 +21,25 @@ def send_notification(time_firebase, token_gcm, title, message):
 
     time_now = strftime("%H:%M", gmtime())
 
-    hh_fb, mm_fb = time_firebase.split(':')
+    hh_fb, mm_fb = time_firebase['final_time'].split(':')
     hh_now, mm_now = time_now.split(':')
 
     hh_fb_int = int(hh_fb)*3600
     hh_fb_int = hh_fb_int + int(mm_fb)
 
     hh_now_int = (int(hh_now) - 3)*3600
-    hh_now_int = hh_now_int + int(mm_now) - 10
+    hh_now_int = hh_now_int + int(mm_now) - 20
 
-
-    print time_firebase, time_now
+    print time_firebase['final_time'], time_now
     print str(hh_fb_int), str(hh_now_int)
 
-    if hh_fb_int > hh_now_int:
+    if hh_now_int == hh_fb_int:
+        return True
+
+    if hh_now_int < hh_fb_int:
         r = requests.post(url, data=json.dumps(data), headers=headers)
         print(r.text)
+        removeMSJDisplay(time_firebase)
         return False;
     else:
         return False;
