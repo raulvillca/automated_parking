@@ -25,7 +25,7 @@ def receive(arg):
         arrayA = Requests.getAReservations()
         mensajes_a_display = Requests.getNotifications()
         #arrayB = Requests.getBReservations()
-        lcd.lcd_display_string("Bienvenido " + mensajes_a_display["fullname"], 1)
+        lcd.lcd_display_string("Bienvenido " + mensajes_a_display[0]["fullname"], 1)
         lcd.lcd_display_string("***SOA*-*IOT***", 2)
         print ("Recibir mensaje")
         i = 0
