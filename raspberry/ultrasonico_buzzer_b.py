@@ -2,11 +2,10 @@
 import RPi.GPIO as GPIO
 import time
 
-BUZZER_A = 37
-TRIG = 38
-ECHO = 40
+BUZZER_A = 26
+TRIG = 20
+ECHO = 21
 V    = 34300
-
 
 def ultrasonico_buzzer_b(mode):
 
@@ -55,3 +54,6 @@ def ultrasonico_buzzer_b(mode):
 
     return distancia
     #GPIO.cleanup()
+
+#ultrasonico_buzzer_b(GPIO.BCM)
+#GPIO.cleanup()

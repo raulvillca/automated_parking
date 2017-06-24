@@ -7,7 +7,6 @@ TRIG = 23
 ECHO = 24
 V    = 34300
 
-
 def ultrasonico_buzzer_a(mode):
 
     #GPIO.setmode(GPIO.BCM)
@@ -55,3 +54,6 @@ def ultrasonico_buzzer_a(mode):
 
     return distancia
     #GPIO.cleanup()
+
+#ultrasonico_buzzer_a(GPIO.BCM)
+#GPIO.cleanup()
