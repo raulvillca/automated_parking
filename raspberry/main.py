@@ -13,8 +13,6 @@ import infra_servo
 
 IS_ACTIVE = True
 HAY_MSJ = False
-cerrojo_ultrasonico_a = False
-cerrojo_ultrasonico_b = False
 
 ADDRESS_LCD = 0x3f
 
@@ -22,6 +20,9 @@ lcd = RPi_I2C_driver.lcd()
 
 def receive(arg):
     while IS_ACTIVE:
+        f = open("tuberia.txt", "r")
+        valor_cerrojos = f.readline()
+        f.close()
         time.sleep(2)
         arrayA = Requests.getAReservations()
         mensajes_a_display = Requests.getNotifications()
@@ -31,7 +32,7 @@ def receive(arg):
         lcd.lcd_display_string("***SOA*-*IOT***", 2)
         time.sleep(4)
 
-        if cerrojo_ultrasonico_a == True & cerrojo_ultrasonico_b == True:
+        if valor_cerrojos is '11':
             lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
             lcd.lcd_display_string("****COMPLETO****", 2)
         else:
@@ -53,11 +54,14 @@ def receive(arg):
         #    i += 1
 
 
+
 def begin():
     cerrojo_ultrasonico_a = False
     cerrojo_ultrasonico_b = False
 
     while IS_ACTIVE == True:
+
+        f = open ("tuberia.txt", "w")
 
         print "evaluando sensores"
 
@@ -80,7 +84,12 @@ def begin():
             cerrojo_ultrasonico_b = True
             print "Ultrasonico b"
 
-                #lcd.lcd_clear()
+        if cerrojo_ultrasonico_a & cerrojo_ultrasonico_b:
+            f.write("11")
+        else:
+            f.write("10")
+
+        f.close()
 
 try:
     subproceso = Thread(target=receive, args=(5,))
