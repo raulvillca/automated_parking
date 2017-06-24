@@ -12,8 +12,6 @@ import RPi_I2C_driver
 import infra_servo
 
 IS_ACTIVE = True
-cerrojo_ultrasonico_a = False
-cerrojo_ultrasonico_b = False
 
 ADDRESS_LCD = 0x3f
 
@@ -45,13 +43,15 @@ def receive(arg):
 
 def begin():
 
+    cerrojo_ultrasonico_a = False
+    cerrojo_ultrasonico_b = False
     subproceso = Thread(target=receive, args=(5,))
     subproceso.start()
 
     while IS_ACTIVE == True:
 
         print "evaluando sensores"
-        
+
         infra_servo.servo_infrarrojo(cerrojo_ultrasonico_a & cerrojo_ultrasonico_b)
 
         result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
