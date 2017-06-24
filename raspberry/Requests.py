@@ -24,17 +24,15 @@ def send_notification(time_firebase, token_gcm, title, message):
     hh_fb, mm_fb = time_firebase.split(':')
     hh_now, mm_now = time_now.split(':')
 
-    hh_fb = hh_fb*100
-    hh_fb = hh_fb + mm_fb
+    hh_fb_int = int(hh_fb)*100
+    hh_fb_int = hh_fb_int + int(mm_fb)
 
-    hh_now = hh_now*100
-    hh_now = hh_now + mm_now - 10
+    hh_now_int = int(hh_now)*100
+    hh_now_int = hh_now_int + int(mm_now) - 10
 
-    print hh_fb + " " + hh_now
+    print hh_fb_int + " " + hh_now_int
 
-
-
-    if hh_fb <= hh_now:
+    if hh_fb_int <= hh_now_int:
         return False;
     else:
         r = requests.post(url, data=json.dumps(data), headers=headers)
