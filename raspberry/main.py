@@ -13,6 +13,8 @@ import infra_servo
 
 IS_ACTIVE = True
 HAY_MSJ = False
+cerrojo_ultrasonico_a = False
+cerrojo_ultrasonico_b = False
 
 ADDRESS_LCD = 0x3f
 
@@ -20,16 +22,22 @@ lcd = RPi_I2C_driver.lcd()
 
 def receive(arg):
     while IS_ACTIVE:
-        time.sleep(1)
+        time.sleep(2)
         arrayA = Requests.getAReservations()
         mensajes_a_display = Requests.getNotifications()
         #arrayB = Requests.getBReservations()
-        HAY_MSJ = True
+
         lcd.lcd_display_string("Bienvenido " + mensajes_a_display[0]["fullname"], 1)
         lcd.lcd_display_string("***SOA*-*IOT***", 2)
-        time.sleep(5)
-        HAY_MSJ = False
-        print ("Recibir mensaje")
+        time.sleep(4)
+
+        if cerrojo_ultrasonico_a == True & cerrojo_ultrasonico_b == True:
+            lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
+            lcd.lcd_display_string("****COMPLETO****", 2)
+        else:
+            lcd.lcd_display_string("  *** HAY ****  ", 1)
+            lcd.lcd_display_string("*DISPONIBILIDAD*", 2)
+        
         i = 0
         while i < len(arrayA):
             print(arrayA[i]['start_time'], arrayA[i]['final_time'], arrayA[i]['user_gcm'])
@@ -46,9 +54,6 @@ def receive(arg):
 
 
 def begin():
-
-    cerrojo_ultrasonico_a = False
-    cerrojo_ultrasonico_b = False
 
     while IS_ACTIVE == True:
 
@@ -73,13 +78,6 @@ def begin():
             cerrojo_ultrasonico_b = True
             print "Ultrasonico b"
 
-        if HAY_MSJ == False:
-            if cerrojo_ultrasonico_a == True & cerrojo_ultrasonico_b == True:
-                lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
-                lcd.lcd_display_string("****COMPLETO****", 2)
-            else:
-                lcd.lcd_display_string("  *** HAY ****  ", 1)
-                lcd.lcd_display_string("*DISPONIBILIDAD*", 2)
                 #lcd.lcd_clear()
 
 try:
