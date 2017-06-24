@@ -2,9 +2,9 @@
 import RPi.GPIO as GPIO
 import time
 
-BUZZER_A = 25
-TRIG = 23
-ECHO = 24
+BUZZER_A = 37
+TRIG = 38
+ECHO = 40
 V    = 34300
 
 
