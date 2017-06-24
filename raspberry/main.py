@@ -99,5 +99,7 @@ try:
     subproceso.start()
     begin()
     subproceso.join()
-except:
+except Exception,e:
+    print str(e)
+    print "Murio"
     IS_ACTIVE = False
