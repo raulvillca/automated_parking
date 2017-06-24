@@ -54,7 +54,7 @@ def begin():
         print "Primer recorrido"
         i = 0
         while i < len(arrayA):
-            Requests.send_notification(arrayA[i], arrayA[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+            Requests.send_notification(arrayA[i]['final_time'], arrayA[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
             i += 1
 
         #print "Segundo recorrido"
