@@ -61,7 +61,7 @@ def begin():
             print "Ultrasonico b"
 
 
-        if cerrojo_ultrasonico_a == True | cerrojo_ultrasonico_b == True:
+        if cerrojo_ultrasonico_a == True & cerrojo_ultrasonico_b == True:
             lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
             lcd.lcd_display_string("****COMPLETO****", 2)
         else:
