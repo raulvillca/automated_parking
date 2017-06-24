@@ -21,8 +21,10 @@ def send_notification(time_firebase, token_gcm, title, message):
 
     time_now = strftime("%H:%M", gmtime())
 
-    hh_fb, mm_fb = time_firebase.split(':')
-    hh_now, mm_now = time_now.split(':')
+    print time_now, time_firebase
+
+    hh_fb, mm_fb = time_firebase.split(":")
+    hh_now, mm_now = time_now.split(":")
 
     hh_fb = hh_fb*100
     hh_fb = hh_fb + mm_fb
@@ -87,7 +89,7 @@ def greaterThanTimeNow(time_firebase):
     datoN = time_now.split(':')
     hh_now = datoN[0]
     mm_now = datoN[1]
-    
+
     #hh_fb, mm_fb = time_firebase.split(':')
     #hh_now, mm_now = time_now.split(':')
 
