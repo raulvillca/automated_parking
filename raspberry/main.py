@@ -20,18 +20,17 @@ lcd = RPi_I2C_driver.lcd()
 
 def receive(arg):
     while IS_ACTIVE:
-        time.sleep(2)
+        time.sleep(1)
         f = open("tuberia.txt", "r")
         valor_cerrojos = f.readline()
         f.close()
 
-        arrayA = Requests.getAReservations()
         mensajes_a_display = Requests.getNotifications()
-        #arrayB = Requests.getBReservations()
 
         lcd.lcd_display_string("Bienvenido " + mensajes_a_display[0]["fullname"], 1)
         lcd.lcd_display_string("***SOA*-*IOT***", 2)
-        time.sleep(4)
+        time.sleep(1.5)
+        Requests.removeNotification(mensajes_a_display[0])
 
         print "Mensaje recibido ", valor_cerrojos
         if valor_cerrojos == '11' :
@@ -41,29 +40,24 @@ def receive(arg):
             lcd.lcd_display_string("  *** HAY ****  ", 1)
             lcd.lcd_display_string("*DISPONIBILIDAD*", 2)
 
-        i = 0
-        while i < len(arrayA):
-            print(arrayA[i]['start_time'], arrayA[i]['final_time'], arrayA[i]['user_gcm'])
-            i += 1
-
-        #print ("B")
-        #i = 0
-        #while i < len(arrayB):
-        #    print(arrayB[i]['start_time'])
-        #    print(arrayB[i]['final_time'])
-        #    print(arrayB[i]['user_gcm'])
-        #    i += 1
-
-
-
 def begin():
     cerrojo_ultrasonico_a = False
     cerrojo_ultrasonico_b = False
 
     while IS_ACTIVE == True:
 
-        print "evaluando sensores"
+        arrayA = Requests.getAReservations()
+        arrayB = Requests.getBReservations()
 
+        for reser_a in arrayA:
+            Requests.send_notification(reser_a, reser_a['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+
+
+        for reser_b in arrayB:
+            Requests.send_notification(reser_b, reser_b['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+
+
+        print "evaluando sensores"
         infra_servo.servo_infrarrojo(cerrojo_ultrasonico_a & cerrojo_ultrasonico_b)
 
         result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
@@ -73,6 +67,7 @@ def begin():
         else:
             cerrojo_ultrasonico_a = True
             print "Ultrasonico a"
+
 
 
         result_b = ultrasonico_buzzer_b.ultrasonico_buzzer_b(GPIO.BCM)
