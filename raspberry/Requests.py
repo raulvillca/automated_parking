@@ -39,24 +39,24 @@ def send_notification(time_firebase, token_gcm, title, message):
 
 def getAReservations():
     arrayParking = {}
-    arrayParking['parking_a'] = firebase.get('/parking_a/unlam/times', None)
+    arrayParking['parking_a'] = firebase.get('/parking_a/parkings/times', None)
 
     i = 0
     arrayItems = {}
     for path in arrayParking['parking_a']:
-        arrayItems[i] = firebase.get('/parking_a/unlam/times/'+path, None)
+        arrayItems[i] = firebase.get('/parking_a/parkings/times/'+path, None)
         i += 1
 
     return arrayItems;
 
 def getBReservations():
     arrayParking = {}
-    arrayParking['parking_b'] = firebase.get('/parking_a/unlam/times', None)
+    arrayParking['parking_b'] = firebase.get('/parking_b/parkings/times', None)
 
     i = 0
     arrayItems = {}
     for path in arrayParking['parking_b']:
-        arrayItems[i] = firebase.get('/parking_a/unlam/times/'+path, None)
+        arrayItems[i] = firebase.get('/parking_b/parkings/times/'+path, None)
         i += 1
 
     return arrayItems;
@@ -78,8 +78,12 @@ def greaterThanTimeNow(time_firebase):
     else:
         return True;
 
-def removeItem(item_firebase):
-    firebase.delete('/parking_a/unlam/times/'+item_firebase['time_id'], None)
+def removeItemA(item_firebase):
+    firebase.delete('/parking_a/parkings/times/'+item_firebase['time_id'], None)
+
+def removeItemB(item_firebase):
+    firebase.delete('/parking_b/parkings/times/'+item_firebase['time_id'], None)
+
 
 #arrayA = getAReservations()
 #arrayB = getBReservations()
