@@ -27,7 +27,7 @@ def receive(arg):
         HAY_MSJ = True
         lcd.lcd_display_string("Bienvenido " + mensajes_a_display[0]["fullname"], 1)
         lcd.lcd_display_string("***SOA*-*IOT***", 2)
-        time.sleep(3)
+        time.sleep(5)
         HAY_MSJ = False
         print ("Recibir mensaje")
         i = 0
@@ -49,8 +49,6 @@ def begin():
 
     cerrojo_ultrasonico_a = False
     cerrojo_ultrasonico_b = False
-    subproceso = Thread(target=receive, args=(5,))
-    subproceso.start()
 
     while IS_ACTIVE == True:
 
@@ -84,9 +82,10 @@ def begin():
                 lcd.lcd_display_string("*DISPONIBILIDAD*", 2)
                 #lcd.lcd_clear()
 
-    subproceso.join()
-
 try:
+    subproceso = Thread(target=receive, args=(5,))
+    subproceso.start()
     begin()
+    subproceso.join()
 except:
     IS_ACTIVE = False
