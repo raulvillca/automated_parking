@@ -30,7 +30,7 @@ def receive(arg):
         lcd.lcd_display_string("Bienvenido " + mensajes_a_display[0]["fullname"], 1)
         lcd.lcd_display_string("***SOA*-*IOT***", 2)
         time.sleep(1.5)
-        Requests.removeNotification(mensajes_a_display[0])
+        #Requests.removeNotification(mensajes_a_display[0])
 
         print "Mensaje recibido ", valor_cerrojos
         if valor_cerrojos == '11' :
