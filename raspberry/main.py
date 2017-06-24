@@ -45,6 +45,8 @@ def receive(arg):
 def begin():
     cerrojo_ultrasonico_a = False
     cerrojo_ultrasonico_b = False
+    enviar_notificacion_a = True
+    enviar_notificacion_b = True
 
     while IS_ACTIVE == True:
 
@@ -57,7 +59,11 @@ def begin():
         i = 0
         while i < len(arrayA):
             print "entra al while"
-            resultado = Requests.send_notification(arrayA[i], arrayA[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+            if enviar_notificacion_a:
+                Requests.send_notification(arrayA[i], arrayA[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+                enviar_notificacion_a = False
+
+            resultado = Requests.equalsTime(arrayA[i]['final_time'])
             if resultado:
                 Requests.removeItemA(arrayA[i])
             i += 1
@@ -66,9 +72,13 @@ def begin():
         print "Segundo recorrido"
         i = 0
         while i < len(arrayB):
-            resultado = Requests.send_notification(arrayB[i], arrayB[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+            if enviar_notificacion_b:
+                Requests.send_notification(arrayB[i], arrayB[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+                enviar_notificacion_b = False
+            
+            resultado = Requests.equalsTime(arrayB[i]['final_time'])
             if resultado:
-                Requests.removeItemA(arrayA[i])
+                Requests.removeItemB(arrayB[i])
             i += 1
 
         print "evaluando sensores"
