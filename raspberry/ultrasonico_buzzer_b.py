@@ -8,7 +8,7 @@ ECHO = 40
 V    = 34300
 
 
-def ultrasonico_buzzer_a(mode):
+def ultrasonico_buzzer_b(mode):
 
     #GPIO.setmode(GPIO.BCM)
     GPIO.setmode(mode)
