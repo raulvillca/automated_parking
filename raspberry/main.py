@@ -56,18 +56,18 @@ def begin():
         while i < len(arrayA):
             print "entra al while"
             resultado = Requests.send_notification(arrayA[i], arrayA[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
-            i += 1
             if resultado:
                 Requests.removeItemA(arrayA[i])
+            i += 1
 
 
         print "Segundo recorrido"
         i = 0
         while i < len(arrayB):
             resultado = Requests.send_notification(arrayB[i], arrayB[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
-            i += 1
             if resultado:
                 Requests.removeItemA(arrayA[i])
+            i += 1
 
         print "evaluando sensores"
         infra_servo.servo_infrarrojo(cerrojo_ultrasonico_a & cerrojo_ultrasonico_b)
