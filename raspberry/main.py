@@ -31,6 +31,7 @@ def receive(arg):
             lcd.lcd_display_string("Bienvenido " + mensajes_a_display[0]["fullname"], 1)
             lcd.lcd_display_string("***SOA*-*IOT***", 2)
             time.sleep(2)
+            print "Eliminar saludo"
             Requests.removeMSJDisplay(mensajes_a_display[0])
 
         print "Mensaje recibido ", valor_cerrojos
