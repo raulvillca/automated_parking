@@ -23,6 +23,7 @@ def begin():
     while IS_ACTIVE == True:
 
         arrayA = Requests.getAReservations()
+        mensajes_a_display = Requests.getNotifications()
         #arrayB = Requests.getBReservations()
 
         print ("A")
@@ -41,7 +42,7 @@ def begin():
         #    print(arrayB[i]['user_gcm'])
         #    i += 1
 
-        infra_servo.servo_infrarrojo(cerrojo_ultrasonico_a)
+        infra_servo.servo_infrarrojo(cerrojo_ultrasonico_a & cerrojo_ultrasonico_b)
 
         result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
         if result_a > 10:

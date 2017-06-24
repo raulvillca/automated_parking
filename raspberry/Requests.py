@@ -45,6 +45,7 @@ def getNotifications():
     arrayItems = {}
     for path in notifications['notifications']:
         arrayItems[i] = firebase.get('/notifications/'+path, None)
+        print "Request ", arrayItems[i]
         i += 1
 
     return arrayItems;
