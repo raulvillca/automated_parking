@@ -32,7 +32,7 @@ def send_notification(time_firebase, token_gcm, title, message):
 
     print hh_fb + " " + hh_now
 
-    
+
 
     if hh_fb <= hh_now:
         return False;

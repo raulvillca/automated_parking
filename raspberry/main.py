@@ -20,7 +20,7 @@ lcd = RPi_I2C_driver.lcd()
 
 def receive(arg):
     while IS_ACTIVE:
-        time.sleep(1)
+        time.sleep(2)
         f = open("tuberia.txt", "r")
         valor_cerrojos = f.readline()
         f.close()
@@ -47,15 +47,21 @@ def begin():
     while IS_ACTIVE == True:
 
         arrayA = Requests.getAReservations()
+        print "Primera request A"
         arrayB = Requests.getBReservations()
+        print "Primera request B"
 
-        for reser_a in arrayA:
-            Requests.send_notification(reser_a, reser_a['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+        print "Primer recorrido"
+        i = 0
+        while i < len(arrayA):
+            Requests.send_notification(arrayA[i], arrayA[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+            i += 1
 
-
-        for reser_b in arrayB:
-            Requests.send_notification(reser_b, reser_b['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
-
+        print "Segundo recorrido"
+        i = 0
+        while i < len(arrayB):
+            Requests.send_notification(arrayB[i], arrayB[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+            i += 1
 
         print "evaluando sensores"
         infra_servo.servo_infrarrojo(cerrojo_ultrasonico_a & cerrojo_ultrasonico_b)
