@@ -81,8 +81,15 @@ def getBReservations():
 def greaterThanTimeNow(time_firebase):
     time_now = strftime("%H:%M", gmtime())
 
-    hh_fb, mm_fb = time_firebase.split(':')
-    hh_now, mm_now = time_now.split(':')
+    datoF = time_firebase.split(':')
+    hh_fb = datoF[0]
+    mm_fb = datoF[1]
+    datoN = time_now.split(':')
+    hh_now = datoN[0]
+    mm_now = datoN[1]
+    
+    #hh_fb, mm_fb = time_firebase.split(':')
+    #hh_now, mm_now = time_now.split(':')
 
     hh_fb = hh_fb*100
     hh_fb = hh_fb + mm_fb
