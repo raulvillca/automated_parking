@@ -33,6 +33,7 @@ def receive(arg):
         lcd.lcd_display_string("***SOA*-*IOT***", 2)
         time.sleep(4)
 
+        print "Mensaje recibido ", valor_cerrojos
         if valor_cerrojos is '11':
             lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
             lcd.lcd_display_string("****COMPLETO****", 2)
@@ -45,7 +46,6 @@ def receive(arg):
             print(arrayA[i]['start_time'], arrayA[i]['final_time'], arrayA[i]['user_gcm'])
             i += 1
 
-        print "Mensaje recibido"
         #print ("B")
         #i = 0
         #while i < len(arrayB):
