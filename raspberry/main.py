@@ -33,6 +33,7 @@ def receive(arg):
             print(arrayA[i]['start_time'], arrayA[i]['final_time'], arrayA[i]['user_gcm'])
             i += 1
 
+        print "Mensaje recibido"
         #print ("B")
         #i = 0
         #while i < len(arrayB):
@@ -49,7 +50,8 @@ def begin():
 
     while IS_ACTIVE == True:
 
-
+        print "evaluando sensores"
+        
         infra_servo.servo_infrarrojo(cerrojo_ultrasonico_a & cerrojo_ultrasonico_b)
 
         result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
