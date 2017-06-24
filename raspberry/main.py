@@ -12,6 +12,7 @@ import RPi_I2C_driver
 import infra_servo
 
 IS_ACTIVE = True
+HAY_MSJ = False
 
 ADDRESS_LCD = 0x3f
 
@@ -23,8 +24,11 @@ def receive(arg):
         arrayA = Requests.getAReservations()
         mensajes_a_display = Requests.getNotifications()
         #arrayB = Requests.getBReservations()
+        HAY_MSJ = True
         lcd.lcd_display_string("Bienvenido " + mensajes_a_display[0]["fullname"], 1)
         lcd.lcd_display_string("***SOA*-*IOT***", 2)
+        time.sleep(3)
+        HAY_MSJ = False
         print ("Recibir mensaje")
         i = 0
         while i < len(arrayA):
@@ -71,14 +75,14 @@ def begin():
             cerrojo_ultrasonico_b = True
             print "Ultrasonico b"
 
-
-        if cerrojo_ultrasonico_a == True & cerrojo_ultrasonico_b == True:
-            lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
-            lcd.lcd_display_string("****COMPLETO****", 2)
-        else:
-            lcd.lcd_display_string("  *** HAY ****  ", 1)
-            lcd.lcd_display_string("*DISPONIBILIDAD*", 2)
-            #lcd.lcd_clear()
+        if HAY_MSJ == False:
+            if cerrojo_ultrasonico_a == True & cerrojo_ultrasonico_b == True:
+                lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
+                lcd.lcd_display_string("****COMPLETO****", 2)
+            else:
+                lcd.lcd_display_string("  *** HAY ****  ", 1)
+                lcd.lcd_display_string("*DISPONIBILIDAD*", 2)
+                #lcd.lcd_clear()
 
     subproceso.join()
 
