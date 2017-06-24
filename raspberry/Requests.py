@@ -37,6 +37,18 @@ def send_notification(time_firebase, token_gcm, title, message):
         print(r.text)
         return True;
 
+def getNotifications():
+    notifications = {}
+    notifications['notifications'] = firebase.get('/notifications', None)
+
+    i = 0
+    arrayItems = {}
+    for path in notifications['notifications']:
+        arrayItems[i] = firebase.get('/notifications/'+path, None)
+        i += 1
+
+    return arrayItems;
+
 def getAReservations():
     arrayParking = {}
     arrayParking['parking_a'] = firebase.get('/parking_a/parkings/times', None)
@@ -83,6 +95,9 @@ def removeItemA(item_firebase):
 
 def removeItemB(item_firebase):
     firebase.delete('/parking_b/parkings/times/'+item_firebase['time_id'], None)
+
+def removeNotification(notification):
+    firebase.delete('/notifications/'+notification['id'], None)
 
 
 #arrayA = getAReservations()
