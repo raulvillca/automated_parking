@@ -39,7 +39,7 @@ def send_notification(time_firebase, token_gcm, title, message):
     else:
         r = requests.post(url, data=json.dumps(data), headers=headers)
         print(r.text)
-        return True;
+        return False;
 
 def getNotifications():
     notifications = {}
