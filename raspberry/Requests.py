@@ -23,14 +23,12 @@ def send_notification(time_firebase, token_gcm, title, message):
 
     hh_fb, mm_fb = time_firebase.split(':')
     hh_now, mm_now = time_now.split(':')
-    print "paso 0"
+
     hh_fb_int = int(hh_fb)*100
     hh_fb_int = hh_fb_int + int(mm_fb)
-    print "paso 1"
+
     hh_now_int = int(hh_now)*100
     hh_now_int = hh_now_int + int(mm_now) - 10
-    print "paso 2"
-    #print hh_fb_int + " " + hh_now_int
 
     if hh_fb_int <= hh_now_int:
         return False;
@@ -87,28 +85,22 @@ def greaterThanTimeNow(time_firebase):
     #mm_now = datoN[1]
 
     hh_fb, mm_fb = time_firebase.split(':')
-    print "paso 0"
 
     hh_fb_int = int(hh_fb)*100
-    print "paso 1"
 
     hh_now, mm_now = time_now.split(':')
-    print "paso 2"
 
     hh_fb_int = hh_fb_int + int(mm_fb)
-    print "paso 3"
 
     hh_now_int = int(hh_now)*100
-    print "paso 4"
 
     hh_now_int = hh_now_int + int(mm_now)
-    print "paso 5"
 
     if hh_fb_int <= hh_now_int:
-        print "paso 6"
+
         return False;
     else:
-        print "paso 7"
+
         return True;
 
 def removeItemA(item_firebase):
@@ -117,7 +109,7 @@ def removeItemA(item_firebase):
 def removeItemB(item_firebase):
     firebase.delete('/parking_b/parkings/times/'+item_firebase['time_id'], None)
 
-def removeNotification(notification):
+def removeMSJDisplay(notification):
     firebase.delete('/notifications/'+notification['id'], None)
 
 

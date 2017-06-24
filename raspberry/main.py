@@ -30,7 +30,7 @@ def receive(arg):
         lcd.lcd_display_string("Bienvenido " + mensajes_a_display[0]["fullname"], 1)
         lcd.lcd_display_string("***SOA*-*IOT***", 2)
         time.sleep(1.5)
-        #Requests.removeNotification(mensajes_a_display[0])
+        Requests.removeMSJDisplay(mensajes_a_display[0])
 
         print "Mensaje recibido ", valor_cerrojos
         if valor_cerrojos == '11' :
@@ -48,8 +48,8 @@ def begin():
 
         arrayA = Requests.getAReservations()
         print "Primera request A"
-        #arrayB = Requests.getBReservations()
-        #print "Primera request B"
+        arrayB = Requests.getBReservations()
+        print "Primera request B"
 
         print "Primer recorrido"
         i = 0
@@ -58,11 +58,11 @@ def begin():
             Requests.send_notification(arrayA[i]['final_time'], arrayA[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
             i += 1
 
-        #print "Segundo recorrido"
-        #i = 0
-        #while i < len(arrayB):
-        #    Requests.send_notification(arrayB[i], arrayB[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
-        #    i += 1
+        print "Segundo recorrido"
+        i = 0
+        while i < len(arrayB):
+            Requests.send_notification(arrayB[i], arrayB[i]['user_gcm'], "TP SOA", "Te queda poco tiempo de uso")
+            i += 1
 
         print "evaluando sensores"
         infra_servo.servo_infrarrojo(cerrojo_ultrasonico_a & cerrojo_ultrasonico_b)
