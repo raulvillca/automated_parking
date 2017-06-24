@@ -37,7 +37,7 @@ def receive(arg):
         else:
             lcd.lcd_display_string("  *** HAY ****  ", 1)
             lcd.lcd_display_string("*DISPONIBILIDAD*", 2)
-        
+
         i = 0
         while i < len(arrayA):
             print(arrayA[i]['start_time'], arrayA[i]['final_time'], arrayA[i]['user_gcm'])
@@ -54,6 +54,8 @@ def receive(arg):
 
 
 def begin():
+    cerrojo_ultrasonico_a = False
+    cerrojo_ultrasonico_b = False
 
     while IS_ACTIVE == True:
 
