@@ -47,7 +47,7 @@ def ultrasonico_buzzer_a(mode):
         elif distancia > 3.9:
             GPIO.output(BUZZER_A, False)
 
-        print "Distancia: ",distancia,"cm"
+        print "Distancia a: ",distancia,"cm"
 
     else:
       print "Fuera de Rango"

@@ -3,8 +3,8 @@ import RPi.GPIO as GPIO
 import time
 
 BUZZER_A = 26
-TRIG = 20
-ECHO = 21
+TRIG = 21
+ECHO = 20
 V    = 34300
 
 def ultrasonico_buzzer_b(mode):
@@ -47,7 +47,7 @@ def ultrasonico_buzzer_b(mode):
         elif distancia > 3.9:
             GPIO.output(BUZZER_A, False)
 
-        print "Distancia: ",distancia,"cm"
+        print "Distancia b: ",distancia,"cm"
 
     else:
       print "Fuera de Rango"
