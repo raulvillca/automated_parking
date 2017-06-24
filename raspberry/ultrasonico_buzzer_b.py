@@ -18,7 +18,7 @@ def ultrasonico_buzzer_b(mode):
 
     GPIO.output(TRIG, False)
     print "Espere que el sensor se estabilice"
-    time.sleep(0.5)
+    time.sleep(0.1)
 
     GPIO.output(TRIG, True)
     time.sleep(0.00001)
