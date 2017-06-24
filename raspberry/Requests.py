@@ -91,11 +91,11 @@ def greaterThanTimeNow(time_firebase):
     hh_fb, mm_fb = time_firebase.split(':')
     hh_now, mm_now = time_now.split(':')
 
-    hh_fb = hh_fb*100
-    hh_fb = hh_fb + mm_fb
+    hh_fb = int(hh_fb)*100
+    hh_fb = int(hh_fb) + int(mm_fb)
 
-    hh_now = hh_now*100
-    hh_now = hh_now + mm_now
+    hh_now = int(hh_now)*100
+    hh_now = int(hh_now) + int(mm_now)
 
     if hh_fb <= hh_now:
         return False;
