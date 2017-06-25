@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/parking_background"
+    tools:context=".SplashActivity">
+    <!--<ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/splash_imageView"
+        android:adjustViewBounds="true"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        android:background="@drawable/maintenance"/>-->
+    <ImageView
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="250dp"
+        android:layout_height="450dp"
+        android:id="@+id/splash_imageView"
+        android:adjustViewBounds="true"
+        android:background="@drawable/car_green"/>
+
+    <ImageView
+        android:layout_gravity="end"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/splash_imageView_indicator"
+        android:background="@drawable/ic_rv_hookup_red"/>
+</FrameLayout>

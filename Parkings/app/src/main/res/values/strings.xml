@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">My Parking</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="URI_SERVER">http://www.json-generator.com</string>
+
+    <string name="alert_title">no soportado</string>
+    <string name="alert_message">Este servicio no es disponible en su dispositivo</string>
+    <string name="alert_accept">Aceptar</string>
+    <string name="message_exit">Para salir, presione atras otra vez</string>
+    <string name="action_settings">Configurar</string>
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_username">Usuario</string>
+    <string name="login_fullname">Nombre y Apellido</string>
+    <string name="login_error_username">El mail no existe</string>
+    <string name="login_error_password">La contraseña no coincide</string>
+    <string name="register">¿aún no tienes cuenta?</string>
+    <string name="register_error_username">El mail es requerido</string>
+    <string name="register_user_exists">Este mail ya fue registrado</string>
+    <string name="register_error_password">La contraseña es requerida</string>
+    <string name="finger_detect">Pase su dedo por el detector de huellas</string>
+    <string name="change_login">¿Quieres iniciar con tu huella?</string>
+    <string name="change_login_noun">Regresar a la pantalla principal</string>
+    <string name="register_fingerprint">Registrar con mi huella digital</string>
+    <string name="fingerprint_fail">La huella digital no coincide con alguna huella registrada</string>
+    <string name="fingerprint_success">Se detecto la huella correctamente</string>
+    <string name="parking_not_found">No se encontraron estacionamientos</string>
+    <string name="start_time">00:00</string>
+    <string name="final_time">01:00</string>
+    <string name="parking_item_message">No hay reservas registradas</string>
+    <string name="parking_item_title">Horarios</string>
+    <string name="parking_item_add">Agregar una reserva</string>
+    <string name="parking_item_add_title_popup">Reservar</string>
+    <string name="fragment_parking_list_title">Lista de parcelas</string>
+    <string name="notification_msg">Responder</string>
+    <string name="button_sheet_header_title">Reservas</string>
+    <string name="large_text">If you would like to declaring a bottom sheet with an your own layout (in xml file), you must make a subclass of BottomSheetDialogFragment. By overriding setupDialog() method, the custom layout will be inflated to the bottom sheet frame. Moreover, the it\'s sliding or state changing event will be handle by a BottomSheetBehavior.BottomSheetCallback variable. Full code for this \"custom bottom sheet\":</string>
+    <string name="bottom_sheet_title">Lista de Parcelas</string>
+    <string name="BottomSheetBehaviorGoogleMapsLike">Titulo</string>
+    <string name="exit">Salir</string>
+    <string name="action_aboutit">Comunicaciones</string>
+
+</resources>

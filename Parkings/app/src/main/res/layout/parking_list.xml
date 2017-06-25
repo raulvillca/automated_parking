@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:behavior_hideable="true"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:background="@android:color/white"
+    android:id="@+id/buttom_sheet_parking_list">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_cardview_item"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_speak"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/bottom_sheet_title"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <ExpandableListView
+        android:background="@color/colorAccent"
+        android:id="@+id/fragment_expandable_list_location"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+</LinearLayout>
