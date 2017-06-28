@@ -68,12 +68,21 @@ public class ParkingListFragment extends Fragment implements ParkingFirebaseRequ
     public void getLocationListResponse(List<Item> itemList) {
 
         for (Item item: itemList) {
-            if (item.getTime_list() != null) {
+            if ( ! item.getTime_list().isEmpty()) {
                 Time time = new Time();
                 time.setOption_button(true);
-                item.getTime_list().add(time);
+                List<Time> times = item.getTime_list();
+                if ( ! times.isEmpty() && times.get(times.size() - 1).getOption_button() != true)
+                    item.getTime_list().add(time);
+            } else {
+                Time time = new Time();
+                time.setOption_button(true);
+                List<Time> times = item.getTime_list();
+                item.setTime_list(times);
             }
         }
+
+
         Log.e(ParkingListFragment.TAG, "Recargar " + new Gson().toJson(itemList));
         //TODO Rearmamos una lista con el item agregar y la pasamos a nuestra VIEW ExpandableListView
         expandableListView.setAdapter(new ParkingListAdapter(getActivity(), itemList, this));

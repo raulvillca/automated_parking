@@ -206,35 +206,13 @@ public class ParkingFirebase {
                     itemList.add(locationItem);
                 }
 
-                if (locationItems.isEmpty()) {
-                    locationItems = itemList;
-
-                    for (ItemFirebase item: locationItems)
+                //TODO retornamos cada parkin de la lista
+                if ( ! itemList.isEmpty()) {
+                    for (ItemFirebase item: itemList)
                         parkingFirebase.parkingResponse(item.getLocation_id(), item);
-
-                } else {
-                    boolean isNewItem = true;
-
-                    for (ItemFirebase newItem: itemList) {
-                        for (ItemFirebase item: locationItems) {
-                            if (item.getLocation_id().equals(newItem.getLocation_id())) {
-                                item.setLocation_state(newItem.getLocation_state());
-                                item.setLocation_name(newItem.getLocation_name());
-
-                                isNewItem = false;
-                            }
-                        }
-
-                        if (isNewItem) {
-                            locationItems.add(newItem);
-
-                            parkingFirebase.parkingResponse(newItem.getLocation_id(), newItem);
-                        }
-                    }
-
                 }
 
-                Log.e("JsonParkings", new Gson().toJson(locationItems));
+                Log.e("JsonParkings", new Gson().toJson(itemList));
             }
 
             @Override
@@ -266,6 +244,8 @@ public class ParkingFirebase {
                     timeList.add(time);
                 }
 
+                parkingFirebase.timeResponse(parking_id, location_id, timeList);
+                /*TODO Refrescamos la lista completa
                 if (times.isEmpty()) {
                     times = timeList;
 
@@ -298,9 +278,9 @@ public class ParkingFirebase {
                             }
                         }
                     }
-                }
+                }*/
 
-                Log.e("JsonTimes", new Gson().toJson(times));
+                Log.e("JsonTimes", new Gson().toJson(timeList));
             }
 
             @Override

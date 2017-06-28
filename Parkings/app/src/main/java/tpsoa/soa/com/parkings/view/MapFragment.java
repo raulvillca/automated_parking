@@ -55,8 +55,6 @@ public class MapFragment extends Fragment implements
     private Location location;
     private LocationManager locationManager;
     private List<ParkingPoint> positions;
-    List<ParkingPoint> parkings;
-
     private ParkingFirebase firebase;
 
     private List<Item> items;
@@ -119,22 +117,22 @@ public class MapFragment extends Fragment implements
 
     private void setParkings(List<ParkingPoint> list, int zoom) {
         if(mMap != null) {
-            parkings = list;
             mMap.clear();
 
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-            if ( parkings != null) {
+            if ( list != null) {
+
                 //Cargamos parkings
-                for (int i = 0; i < parkings.size(); i++) {
-                    LatLng latLngParking = new LatLng(Double.valueOf(parkings.get(i).getLatitude()), Double.valueOf(parkings.get(i).getLongitude()));
+                for (int i = 0; i < list.size(); i++) {
+                    LatLng latLngParking = new LatLng(Double.valueOf(list.get(i).getLatitude()), Double.valueOf(list.get(i).getLongitude()));
                     builder.include(latLngParking);
 
                     mMap.setOnMarkerClickListener(this);
                     marker = mMap.addMarker(new MarkerOptions()
                             .position(latLngParking)
                             .title("Estacionamiento")
-                            .snippet(parkings.get(i).getDescription())
+                            .snippet(list.get(i).getDescription())
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
 
                 }
@@ -216,6 +214,7 @@ public class MapFragment extends Fragment implements
 
         if (location != null) {
             //obtengo mi posicion
+            this.location = location;
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
 
@@ -309,6 +308,7 @@ public class MapFragment extends Fragment implements
         //si el fragmento existe pero no esa visible solo la mostramos
         //sino significa que ya fue creado y existe entonces no hacemos nada
         if (fragment == null) {
+
             Bundle bundle = new Bundle();
             bundle.putString("items", new Gson().toJson(items));
             fragment = new ParkingListFragment();
@@ -338,9 +338,6 @@ public class MapFragment extends Fragment implements
         return true;
     }
 
-
-
-    /*      */
     @Override
     public void getParkingListResponse(List<ParkingPoint> positionList) {
         setParkings(positionList, 10);
@@ -355,12 +352,33 @@ public class MapFragment extends Fragment implements
     public void parkingResponse(String parking_id, ItemFirebase itemFirebase) {
         firebase.getReservationList(parking_id, itemFirebase.getLocation_id());
 
-        Log.e(MapFragment.TAG, parking_id + " " + new Gson().toJson(itemFirebase));
         items.add(
                 new Item(itemFirebase.getLocation_id(),
                         itemFirebase.getLocation_name(),
                         new ArrayList<Time>(),
                         itemFirebase.getLocation_state()));
+    }
+
+    @Override
+    public void timeResponse(String parking_id, String location_id, List<Time> times) {
+        //TODO obtengo la lista de horarios de cada parking y le cargo el boton de AGREGAR
+        for (Item item: items) {
+            if (item.getLocation_id().equals(parking_id)) {
+                Time time = new Time();
+                time.setOption_button(true);
+                times.add(time);
+                item.setTime_list(times);
+            }
+        }
+
+        fragment = (ParkingListFragment) getActivity().getSupportFragmentManager()
+                .findFragmentByTag(ParkingListFragment.TAG);
+
+        if (fragment != null && fragment.isVisible()) {
+
+            fragment.getLocationListResponse(items);
+            Log.e(MapFragment.TAG, "RefrescarLista");
+        }
     }
 
     @Override
@@ -370,8 +388,9 @@ public class MapFragment extends Fragment implements
 
     @Override
     public void timeListener(String parking_id, String location_id, Time time) {
-
+/*TODO YA NO SE ACTUALIZA POR HORARIO
         for (Item item: items) {
+
             if ( ! item.getTime_list().isEmpty() &&
                     item.getTime_list().get(item.getTime_list().size() - 1).getOption_button()) {
                 item.getTime_list().remove(item.getTime_list().size() - 1);
@@ -391,12 +410,12 @@ public class MapFragment extends Fragment implements
             fragment.getLocationListResponse(items);
             Log.e(MapFragment.TAG, "RefrescarLista");
         }
-
+*/
     }
 
     @Override
     public void updateTimeListListener(String parking_id, String location_id, List<Time> times) {
-
+/*TODO YA NO SE ACTUALIZA POR ITEM
         for (Item item: items) {
             if ( ! item.getTime_list().isEmpty() &&
                     item.getTime_list().get(item.getTime_list().size() - 1).getOption_button()) {
@@ -414,7 +433,8 @@ public class MapFragment extends Fragment implements
 
         if (fragment != null && fragment.isVisible()) {
             fragment.getLocationListResponse(items);
-        }
+            Log.e(MapFragment.TAG, "RefrescarLista:Update");
+        }*/
     }
 
     /***
@@ -422,9 +442,20 @@ public class MapFragment extends Fragment implements
      * que agito el celular y centramos el mapa junto con el parking
      */
     public void actions() {
+        //TODO mostramos informacion del estacionamiento
         marker.showInfoWindow();
 
+        //TODO enviamos informacion de nosotros, para que la placa nos de una bienvenida
         firebase.sendingNotificationToParking();
 
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        if (location != null && marker != null) {
+
+            //TODO hacemos un zoom del mapa en el que se encuadre nuestra posicion y el estacionamiento
+            builder.include(marker.getPosition())
+                    .include(new LatLng(location.getLatitude(), location.getLongitude()));
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(builder.build(), 400, 600, 10);
+            mMap.animateCamera(cu);
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.design.widget.NavigationView;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     private float last_z;
     private float valorP;
     private boolean showInfoWindow;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         clickCounter = 0;
         lastUpdate = 0;
         last_x = last_y = last_z = valorP = 0;
-
+        mediaPlayer = MediaPlayer.create(this, R.raw.r2d2);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -104,7 +106,12 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (fragment != null && fragment.isVisible()) {
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.from_top_to_bottom, R.anim.from_bottom_to_top)
+                    .remove(fragment)
+                    .commit();
+            mediaPlayer = MediaPlayer.create(this, R.raw.saberoff);
+            mediaPlayer.start();
         } else {
             //TODO si quiere salir entonces le damos 1,5 seg
             //para que vuelva a tocar atras y salga, sino
@@ -192,14 +199,14 @@ public class MainActivity extends AppCompatActivity
                     last_x = x;
                     last_y = y;
                     last_z = z;
+
                 }
             } else if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
                 valorP = event.values[0];
             }
         }
 
-
-        if (showInfoWindow) {
+        if (showInfoWindow && ! mediaPlayer.isPlaying()) {
             MapFragment fragment = (MapFragment) getSupportFragmentManager()
                     .findFragmentByTag(MapFragment.TAG);
 
@@ -207,17 +214,40 @@ public class MainActivity extends AppCompatActivity
             //del mapa este visible y luego realizamos acciones asociadas
             if (fragment != null && fragment.isVisible()) {
                 fragment.actions();
+
+                //TODO reproducimos sonido de r2d2
+                mediaPlayer = MediaPlayer.create(this, R.raw.r2d2);
+                mediaPlayer.start();
             }
         }
 
         if (valorP == 0) {
-            Log.e(MainActivity.TAG, "Proximidad " + valorP);
+            if (! mediaPlayer.isPlaying()) {
+                ParkingListFragment parkingListFragment = (ParkingListFragment) getSupportFragmentManager()
+                        .findFragmentByTag(ParkingListFragment.TAG);
+                if (parkingListFragment != null && parkingListFragment.isVisible()) {
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.from_top_to_bottom, R.anim.from_bottom_to_top)
+                            .remove(parkingListFragment)
+                            .commit();
+                    Log.e(MainActivity.TAG, "Destruir fragment");
+
+                    //TODO reproducimos sonido de espada starwar cuando se cierra
+                    mediaPlayer = MediaPlayer.create(this, R.raw.saberoff);
+                    mediaPlayer.start();
+                }
+            }
+
             MapFragment fragment = (MapFragment) getSupportFragmentManager().findFragmentByTag(MapFragment.TAG);
-            if (fragment != null && fragment.isVisible()) {
+            if (fragment != null && fragment.isVisible() && ! mediaPlayer.isPlaying()) {
                 ParkingListFragment parkingListFragment = (ParkingListFragment) getSupportFragmentManager()
                         .findFragmentByTag(ParkingListFragment.TAG);
                 if (parkingListFragment == null || ! parkingListFragment.isVisible()) {
                     fragment.onMarkerClick(null);
+
+                    //TODO reproducimos sonido de espada starwar
+                    mediaPlayer = MediaPlayer.create(this, R.raw.saberon);
+                    mediaPlayer.start();
                 }
             }
         }

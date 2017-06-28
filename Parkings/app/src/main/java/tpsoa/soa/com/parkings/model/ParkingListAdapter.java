@@ -1,6 +1,7 @@
 package tpsoa.soa.com.parkings.model;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -84,6 +86,7 @@ public class ParkingListAdapter extends BaseExpandableListAdapter {
         CardView cardView = (CardView) view.findViewById(R.id.parking_item_cardview);
 
         switch (item.getTime_list().size()) {
+            case 0:
             case 1:
                 cardView.setBackgroundColor(view.getResources().getColor(R.color.colorGreen));
                 break;
@@ -116,18 +119,6 @@ public class ParkingListAdapter extends BaseExpandableListAdapter {
 
             cardView.setVisibility(View.VISIBLE);
 
-            /**cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new TimePopup(context, v, new PopupCallback() {
-                        @Override
-                        public void reservation(String item, String start_hour, String final_hour) {
-                            Log.e("Modificar", start_hour + " " + final_hour);
-                        }
-                    }).init(item_name, time.getStart_time(), time.getFinal_time());
-                }
-            });*/
-
             TextView textView_start_time = (TextView) view.findViewById(R.id.time_item_start_time);
             TextView textView_final_time = (TextView) view.findViewById(R.id.time_item_final_time);
             textView_start_time.setText(time.getStart_time());
@@ -143,7 +134,14 @@ public class ParkingListAdapter extends BaseExpandableListAdapter {
                     new TimePopup(context, v, new PopupCallback() {
                         @Override
                         public void reservation(String item, String start_hour, String final_hour) {
-                            register.doingRegister(item, start_hour, final_hour);
+                            int hour_start = Integer.parseInt(start_hour.split(":")[0]);
+                            int hour_final = Integer.parseInt(final_hour.split(":")[0]);
+                            //TODO registramos reservas superiores a 1 hora
+                            if ( hour_start < hour_final) {
+                                register.doingRegister(item, start_hour, final_hour);
+                            } else {
+                                Toast.makeText(context, context.getString(R.string.parking_item_error), Toast.LENGTH_LONG).show();
+                            }
                             Log.e("REGISTRAR", start_hour + " " + final_hour);
                         }
                     }).init(item_name);
