@@ -6,18 +6,11 @@ import json
 import time
 import sys
 
+import led_ldr
 import ultrasonico_buzzer_a
 import ultrasonico_buzzer_b
 import RPi_I2C_driver
 import infra_servo
-
-
-
-piezo = 29
-fotocelda = 31
-
-current_state = 0
-
 
 IS_ACTIVE = True
 HAY_MSJ = False
@@ -124,6 +117,10 @@ def begin():
 
 try:
     subproceso = Thread(target=receive, args=(5,))
+
+    proceso_led = Thread(target=led_ldr.luces, args=(2,))
+
+    proceso_led.start()
 
     subproceso.start()
     begin()
