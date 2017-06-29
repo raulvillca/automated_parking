@@ -27,14 +27,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="86" column="31" lean-forward="false" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
+            <state relative-caret-position="385">
+              <caret line="96" column="33" lean-forward="true" selection-start-line="96" selection-start-column="33" selection-end-line="96" selection-end-column="33" />
               <folding>
                 <element signature="e#18#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ultrasonico_buzzer_b.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ultrasonico_buzzer_b.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="46" column="28" lean-forward="false" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ultrasonico_buzzer_a.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ultrasonico_buzzer_a.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="46" column="28" lean-forward="false" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,12 +126,12 @@
         <option value="$PROJECT_DIR$/Display.py" />
         <option value="$PROJECT_DIR$/LCDDriver.py" />
         <option value="$PROJECT_DIR$/UltrasonicSensor.py" />
-        <option value="$PROJECT_DIR$/ultrasonico_buzzer_b.py" />
-        <option value="$PROJECT_DIR$/ultrasonico_buzzer_a.py" />
         <option value="$PROJECT_DIR$/RPi_I2C_driver.py" />
         <option value="$PROJECT_DIR$/Requests.py" />
         <option value="$PROJECT_DIR$/infra_servo.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/ultrasonico_buzzer_a.py" />
+        <option value="$PROJECT_DIR$/ultrasonico_buzzer_b.py" />
       </list>
     </option>
   </component>
@@ -635,13 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ultrasonico_buzzer_a.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Requests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="790">
@@ -662,21 +675,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ultrasonico_buzzer_b.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="13" />
+        <state relative-caret-position="385">
+          <caret line="96" column="33" lean-forward="true" selection-start-line="96" selection-start-column="33" selection-end-line="96" selection-end-column="33" />
+          <folding>
+            <element signature="e#18#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ultrasonico_buzzer_a.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="46" column="28" lean-forward="false" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/ultrasonico_buzzer_b.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="86" column="31" lean-forward="false" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
-          <folding>
-            <element signature="e#18#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="332">
+          <caret line="46" column="28" lean-forward="false" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
