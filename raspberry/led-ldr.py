@@ -11,23 +11,18 @@ GPIO.setup(fotocelda,GPIO.IN)
 
 current_state = 0
 
-try:      
-	while True:
-		print GPIO.input(fotocelda)
-		if GPIO.input(fotocelda) == 1: 
-			time.sleep(0.1)
-			print("paso")
-        
-			GPIO.output(piezo,True)
-       			time.sleep(1)
-        		print("paso 1")
-        		GPIO.output(piezo, False)
-	
-        		time.sleep(1)
-        		print("paso 2")
-        		time.sleep(5)
-	
-except KeyboardInterrupt:
-    pass
-finally:
-    GPIO.cleanup()
+def luces(valor):
+	try:
+		while True:
+			print GPIO.input(fotocelda)
+			if GPIO.input(fotocelda) == 1 :
+				time.sleep(0.1)
+				GPIO.output(piezo,True)
+				print("encendido")
+				time.sleep(2)
+			else:
+				GPIO.output(piezo,False)
+				print("apagado")
+
+	except KeyboardInterrupt:
+		pass
