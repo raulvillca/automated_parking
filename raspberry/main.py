@@ -18,6 +18,7 @@ fotocelda = 31
 
 current_state = 0
 
+
 IS_ACTIVE = True
 HAY_MSJ = False
 GLOBAL_SERVO = False
@@ -124,7 +125,6 @@ def begin():
 try:
     subproceso = Thread(target=receive, args=(5,))
 
-    lucesproceso = Thread(target=luces, args=(5,))
     subproceso.start()
     begin()
     subproceso.join()
