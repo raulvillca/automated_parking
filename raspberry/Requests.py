@@ -50,7 +50,7 @@ def equalsTime(time_firebase):
     hh_fb_int = int(hh_fb)*3600
     hh_fb_int = hh_fb_int + int(mm_fb)
 
-    hh_now_int = (int(hh_now) - 3)*3600
+    hh_now_int = (int(hh_now))*3600
     hh_now_int = hh_now_int + int(mm_now) - 20
 
     if hh_now_int == hh_fb_int:
