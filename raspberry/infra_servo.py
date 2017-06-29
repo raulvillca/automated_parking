@@ -13,7 +13,7 @@ GPIO.setup(PIN_SENSOR_A,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 servo_a = GPIO.PWM(PIN_SERVO_A, 50)
 
-servo_a.start(0.5)
+servo_a.start(0.3)
 
 def servo_infrarrojo (value):
 	print "servo_infrarrojo:Valor del infrarrojo ", value, GPIO.input(PIN_SENSOR_A)

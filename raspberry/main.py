@@ -13,6 +13,7 @@ import infra_servo
 
 IS_ACTIVE = True
 HAY_MSJ = False
+GLOBAL_SERVO = False
 
 ADDRESS_LCD = 0x3f
 
@@ -34,7 +35,7 @@ def receive(arg):
             print "Eliminar saludo"
             Requests.removeMSJDisplay(mensajes_a_display[0])
 
-        print "Mensaje recibido ", valor_cerrojos
+        print "MENSAJE RECIBIDO ", valor_cerrojos, GLOBAL_SERVO
         if valor_cerrojos == '11' :
             lcd.lcd_display_string("ESTACIONAMIENTO*", 1)
             lcd.lcd_display_string("****COMPLETO****", 2)
@@ -81,8 +82,11 @@ def begin():
                 Requests.removeItemB(arrayB[i])
             i += 1
 
-        print "evaluando sensores"
-        infra_servo.servo_infrarrojo(cerrojo_ultrasonico_a & cerrojo_ultrasonico_b)
+        abrir_servo = cerrojo_ultrasonico_a & cerrojo_ultrasonico_b
+        GLOBAL_SERVO = abrir_servo
+        print "MENSAJE A ENVIAR ", GLOBAL_SERVO
+
+        infra_servo.servo_infrarrojo(abrir_servo)
 
         result_a = ultrasonico_buzzer_a.ultrasonico_buzzer_a(GPIO.BCM)
         if result_a > 10:
@@ -91,8 +95,6 @@ def begin():
         else:
             cerrojo_ultrasonico_a = True
             print "Ultrasonico a"
-
-
 
         result_b = ultrasonico_buzzer_b.ultrasonico_buzzer_b(GPIO.BCM)
         if result_b > 10:
