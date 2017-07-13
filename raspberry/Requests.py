@@ -58,10 +58,10 @@ def equalsTime(time_firebase):
     else:
         return False
 
+#Si no existe los datos en la DB de firebase, entonces devuelve NONE
 def getNotifications():
     notifications = {}
     notifications['notifications'] = firebase.get('/notifications', None)
-
 
     i = 0
     arrayItems = {}
@@ -79,35 +79,34 @@ def getAReservations():
     arrayParking = {}
     arrayParking['parking_a'] = firebase.get('/parking_a/parkings/times', None)
 
-    i = 0
-    arrayItems = {}
-    for path in arrayParking['parking_a']:
-        arrayItems[i] = firebase.get('/parking_a/parkings/times/'+path, None)
-        i += 1
+    if arrayParking['parking_a'] != None :
+        i = 0
+        arrayItems = {}
+        for path in arrayParking['parking_a']:
+            arrayItems[i] = firebase.get('/parking_a/parkings/times/'+path, None)
+            i += 1
 
-    return arrayItems;
+        return arrayItems;
+    else :
+        return None;
 
 def getBReservations():
     arrayParking = {}
     arrayParking['parking_b'] = firebase.get('/parking_b/parkings/times', None)
 
-    i = 0
-    arrayItems = {}
-    for path in arrayParking['parking_b']:
-        arrayItems[i] = firebase.get('/parking_b/parkings/times/'+path, None)
-        i += 1
+    if arrayParking['parking_b'] != None :
+        i = 0
+        arrayItems = {}
+        for path in arrayParking['parking_b']:
+            arrayItems[i] = firebase.get('/parking_b/parkings/times/'+path, None)
+            i += 1
 
-    return arrayItems;
+        return arrayItems;
+    else :
+        return None;
 
 def greaterThanTimeNow(time_firebase):
     time_now = strftime("%H:%M", gmtime())
-
-    #datoF = time_firebase.split(':')
-    #hh_fb = datoF[0]
-    #mm_fb = datoF[1]
-    #datoN = time_now.split(':')
-    #hh_now = datoN[0]
-    #mm_now = datoN[1]
 
     hh_fb, mm_fb = time_firebase.split(':')
 
