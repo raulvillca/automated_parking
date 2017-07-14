@@ -5,7 +5,6 @@
 
 -------------------
 # Sistema Embebido
-## Descripción
 La funcionalidad principal del sistema es gestionar los espacios disponibles en un estacionamiento informando a los clientes sobre la disponibilidad del lugar a través de un display en la entrada del estacionamiento. La gestión se realizara utilizando los sensores ultrasónicos que informaran si el espacio está ocupado o no. Además, estos sensores controlaran una posible colisión del automóvil al estacionar y en caso de ser necesario se alertara al conductor mediante la activación de una bocina (buzzer).
 
 **Componentes**
@@ -36,7 +35,6 @@ La funcionalidad principal del sistema es gestionar los espacios disponibles en 
 --------------
 
 # Aplicación android
-## Descripción
 La aplicación sirve de intermediario para comunicarse con el estacionamiento automatizado a través del celular. 
 Para ello creamos en primer lugar las interfaces de usuario. 
 La primera activity que se muestra al iniciarse la aplicación verifica si el usuario ya está ingresado en el sistema o no.
@@ -45,10 +43,43 @@ partir del uso de huella digital. Si el usuario no está registrado en la aplic
 registro desde la misma pantalla.
 
 **Version**
-* compileSdkVersion 25
-* buildToolsVersion "25.0.2"
-* minSdkVersion 19
-* version de gradle 2.2.3
+```
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "tpsoa.soa.com.parkings"
+        minSdkVersion 19
+        targetSdkVersion 25
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:cardview-v7:25.1.1'
+    compile 'com.android.support:design:25.1.1'
+    
+    //biblioteca para compilar apk, luego de pasar 64k de metodos referenciados
+    compile 'com.android.support:multidex:1.0.0'
+
+    //biblioteca para usar el servicio de localización de google mapas
+    compile 'com.google.android.gms:play-services-places:9.6.1'
+    
+    //bibliotecas de firebase para utilizar la base de datos y notificaciones
+    compile 'com.google.firebase:firebase-core:9.6.1'
+    compile 'com.google.firebase:firebase-database:9.6.1'
+    compile 'com.google.firebase:firebase-messaging:9.6.1'
+    
+    compile 'com.google.code.gson:gson:2.6.2'
+    
+    //sdk de samsung para reconocimiento de huellas
+    compile files('libs/sdk-v1.0.0.jar')
+    compile files('libs/pass-v1.2.2.jar')
+}
+
+//carga la configuración del archivo google-services.json
+apply plugin: 'com.google.gms.google-services'
+```
 
 **Componentes**
 * Notificaciones push
@@ -75,4 +106,4 @@ Este servicio es utilizado para registrar dispositivo a la nube y comenzar a rec
 Este servicio se encargará de recibir los mensajes que el servidor de firebase nos este enviando
 
 **nota**: Tanto el servicio de notificaciones como el de base de datos estaran vinculados a un proyecto en la consola de firebase, 
-por lo cual el paquete del proyecto android debe encontrarse en la configuración del archivo google-service.json
+por lo cual el paquete del proyecto android debe encontrarse en la configuración del archivo google-services.json
