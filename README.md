@@ -44,6 +44,12 @@ En caso de no estarlo se mostrará una pantalla que permite el ingreso de clave
 partir del uso de huella digital. Si el usuario no está registrado en la aplicación puede seleccionar la opción de 
 registro desde la misma pantalla.
 
+**Version**
+* compileSdkVersion 25
+* buildToolsVersion "25.0.2"
+* minSdkVersion 19
+* version de gradle 2.2.3
+
 **Componentes**
 * Notificaciones push
 * Base de datos de tiempo real
